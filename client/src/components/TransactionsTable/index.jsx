@@ -1,9 +1,10 @@
+
 function TransactionsTable() {
-  return (
-    <div>
-      Hello World!
+  return ( 
+    <div className="form">
+    <p>Hello World!</p>
     </div>
-  )
-}
+  );
+};
 
 export default TransactionsTable;
