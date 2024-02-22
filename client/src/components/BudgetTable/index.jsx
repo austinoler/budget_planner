@@ -1,5 +1,6 @@
 function BudgetTable() {
   return (
+  // Table that will display user's budget categorie/ amount, expenses, and budget variance  
     <table className="table">
       <thead>
         <tr className="col">

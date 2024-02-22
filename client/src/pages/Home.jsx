@@ -15,6 +15,7 @@
 
 import BudgetTotal from "../components/BudgetTotal";
 import BudgetTable from "../components/BudgetTable";
+import BudgetForm from "../components/BudgetForm";
 import ExpensesForm from "../components/ExpensesForm";
 import TransactionsTable from "../components/TransactionsTable";
 
@@ -23,6 +24,7 @@ const Home = () => {
     <div className="container">      
       <BudgetTotal/>
       <BudgetTable/>
+      <BudgetForm/>
       <ExpensesForm/>
       <TransactionsTable/>
     </div>
