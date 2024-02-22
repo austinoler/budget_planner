@@ -21,7 +21,7 @@ import TransactionsTable from "../components/TransactionsTable";
 
 const Home = () => {
   return (
-    <div className="container">      
+    <div className="container row">      
       <BudgetTotal/>
       <BudgetTable/>
       <BudgetForm/>

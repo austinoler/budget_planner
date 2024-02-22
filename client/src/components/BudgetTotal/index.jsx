@@ -7,7 +7,7 @@ function BudgetTotal() {
   // Form that will allow user to input their total budget for the month  
     <div className="form justify-content-center">
       <div className="form-Group text-center">
-        <label for="budgetInput" className="fs-4">This Month's Budget:</label>
+        <label for="budgetInput" className="fs-2">This Month's Budget:</label>
         <div className="row justify-content-center">
           <span className="col-1 w-auto fs-4">$</span>
           <span className="col-2 w-25">
