@@ -1,7 +1,6 @@
 {
   "name": "mern-shopping",
   "version": "1.0.0",
-  "description": "",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -15,5 +14,15 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "express": "^4.18.2",
+    "graphsql": "^0.0.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^8.1.3",
+    "react": "^18.2.0",
+    "vite": "^5.1.3"
   }
 }

@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.hover-effect:hover {
+  cursor: pointer;
+  background-color: #ebf30e;
+}
