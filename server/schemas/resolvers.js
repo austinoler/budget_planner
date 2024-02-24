@@ -8,6 +8,9 @@ const resolvers = {
     },
     users: async () => {
       return await User.find();
+    },
+    user: async (parent, args) => {
+      return await User.findById({ _id: args.id })
     }
   },
   Mutation: {
@@ -40,6 +43,16 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+
+    addBudget: async (parent, args, context) => {
+      if (context.user) {
+        const budget = await Budget.create({args});
+        await User.findByIdAndUpdate({ _id : context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true });
+        return budget;
+      }
+
+      throw AuthenticationError;
     }
   }
 };

@@ -10,9 +10,9 @@ const typeDefs = `
 
   type Budget {
     _id: ID
-    month: String!
+    date: String!
     total: Float!
-    category: String
+    categories: [Category]
   }
 
   type Expense {
@@ -37,12 +37,15 @@ const typeDefs = `
   type Query {
     categories: [Category]
     users: [User]
+    user(id: ID!): User
+    budgets: [Budget]
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
+    addBudget(date: String!, total: Float!): Budget
   }
 `;
 

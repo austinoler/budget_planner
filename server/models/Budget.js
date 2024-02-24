@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 const Category = require('./Category')
 
 const budgetSchema = new Schema({
-  month: {
-    type: String,
+  date: {
+    type: Date,
     required: true,
     trim: true
   },
@@ -14,7 +14,10 @@ const budgetSchema = new Schema({
     required: true,
     trim: true
   },
-  category : [Category.schema]
+  categories : [ {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
+  }]
 
 });
 

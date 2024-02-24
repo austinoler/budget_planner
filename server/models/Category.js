@@ -13,7 +13,10 @@ const categorySchema = new Schema({
     type: Number,
     required: true,
   },
-  expenses : [Expense.schema]
+  expenses : [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Expense'
+  }]
 });
 
 const Category = mongoose.model('Category', categorySchema);
