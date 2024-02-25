@@ -5,12 +5,13 @@ const typeDefs = `
     firstName: String!
     lastName: String!
     email: String!
-    budget : [Budget]
+    budgets : [Budget]
   }
 
   type Budget {
     _id: ID
-    date: String!
+    month: Int!
+    year: Int!
     total: Float!
     categories: [Category]
   }
@@ -28,7 +29,6 @@ const typeDefs = `
     expenses: [Expense]
   }
 
-
   type Auth {
     token: ID
     user: User
@@ -45,7 +45,8 @@ const typeDefs = `
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
-    addBudget(date: String!, total: Float!): Budget
+    addBudget(month: Int!, year: Int!, total: Float!): Budget
+    removeBudget(budgetId: ID): Budget
   }
 `;
 

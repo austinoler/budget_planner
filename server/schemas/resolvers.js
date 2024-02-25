@@ -11,6 +11,9 @@ const resolvers = {
     },
     user: async (parent, args) => {
       return await User.findById({ _id: args.id })
+    },
+    budgets: async () => {
+      return await Budget.find();
     }
   },
   Mutation: {
@@ -44,14 +47,31 @@ const resolvers = {
 
       return { token, user };
     },
-
-    addBudget: async (parent, args, context) => {
+    addBudget: async (parent, { month, year , total }, context) => {
       if (context.user) {
-        const budget = await Budget.create({args});
-        await User.findByIdAndUpdate({ _id : context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true });
+
+        const budget = await Budget.create({month, year , total});
+        console.log(budget);
+        const user = await User.findOneAndUpdate({ _id : context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true }).populate('budgets');
+        console.log(user);
         return budget;
       }
 
+      throw AuthenticationError;
+    },
+    removeBudget: async ( parent, { budgetId }, context ) => {
+      if (context.user) {
+        const budget = await Budget.findOneAndDelete({
+          _id: budgetId,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id},
+          { $pull: { budgets: budget._id}}
+        );
+      
+        return budget;
+      }
       throw AuthenticationError;
     }
   }

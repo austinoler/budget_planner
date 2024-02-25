@@ -16,11 +16,16 @@ function BudgetTotal() {
 
   const handleSubmit = async (event) => {
     // Hide the form when the user submits
-    console.log(new Date().toString(), parseFloat(totalBudget));
+    const date = new Date();
+    console.log(date);
+    const month = date.getMonth()+1;
+    const year = date.getFullYear();
+    console.log(month, year);
     try {
       const { data } = await addBudget({
         variables: {
-          date: new Date().toString(),
+          month,
+          year,
           total: parseFloat(totalBudget)
         },
       });

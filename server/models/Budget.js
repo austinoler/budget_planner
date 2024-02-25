@@ -4,8 +4,13 @@ const { Schema } = mongoose;
 const Category = require('./Category')
 
 const budgetSchema = new Schema({
-  date: {
-    type: Date,
+  month: {
+    type: Number,
+    required: true,
+    trim: true
+  },
+  year: {
+    type: Number,
     required: true,
     trim: true
   },

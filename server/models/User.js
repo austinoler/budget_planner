@@ -25,7 +25,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  budget : [{
+  budgets : [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Budget'
   }]
