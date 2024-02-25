@@ -10,10 +10,15 @@ const resolvers = {
       return await User.find();
     },
     user: async (parent, args) => {
-      return await User.findById({ _id: args.id })
+      return await User.findById({ _id: args.id });
     },
     budgets: async () => {
       return await Budget.find();
+    },
+    budget: async (parent, {userId, month, year}, context) => {
+     const budget = Budget.findOne({ userId, month, year });
+      return budget;
+      
     }
   },
   Mutation: {
@@ -47,10 +52,10 @@ const resolvers = {
 
       return { token, user };
     },
-    addBudget: async (parent, { month, year , total }, context) => {
+    addBudget: async (parent, { userId, month, year , total }, context) => {
       if (context.user) {
 
-        const budget = await Budget.create({month, year , total});
+        const budget = await Budget.create({userId, month, year , total});
         console.log(budget);
         const user = await User.findOneAndUpdate({ _id : context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true }).populate('budgets');
         console.log(user);

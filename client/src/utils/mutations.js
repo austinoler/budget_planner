@@ -51,11 +51,12 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_BUDGET = gql`
-mutation Mutation($month: Int!, $year: Int!, $total: Float!) {
-  addBudget(month: $month, year: $year, total: $total) {
+mutation addBudget($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
+  addBudget(userId: $userId, month: $month, year: $year, total: $total) {
+    userId
     month
-    total
     year
+    total
   }
 }
 `;
