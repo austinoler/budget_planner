@@ -56,7 +56,7 @@ const typeDefs = `
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
     addBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
-    removeBudget(budgetId: ID): Budget
+    updateBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
   }
 `;
 

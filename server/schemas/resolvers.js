@@ -64,22 +64,13 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    removeBudget: async ( parent, { budgetId }, context ) => {
-      if (context.user) {
-        const budget = await Budget.findOneAndDelete({
-          _id: budgetId,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id},
-          { $pull: { budgets: budget._id}}
-        );
+    updateBudget: async ( parent, { userId, month, year, total }) => {
+      await Budget.findOneAndUpdate({userId, month, year}, {total});
       
-        return budget;
-      }
-      throw AuthenticationError;
     }
+
   }
 };
 
 module.exports = resolvers;
+

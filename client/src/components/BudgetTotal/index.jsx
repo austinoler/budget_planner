@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_BUDGET } from '../../utils/mutations';
+import { ADD_BUDGET, UPDATE_BUDGET } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 function BudgetTotal() {
   const [totalBudget, setTotalBudget] = useState(null);
   const [showForm, setShowForm] = useState(true);
 
   const [addBudget, { error }] = useMutation (ADD_BUDGET);
+  const [updateBudget, { error2 }] = useMutation (UPDATE_BUDGET);
 
   const handleInputChange = (event) => {
     // Set the total budget
@@ -22,17 +23,31 @@ function BudgetTotal() {
     const year = date.getFullYear();
     const userId = Auth.getProfile().data._id
     console.log(month, year);
-    try {
-      const { data } = await addBudget({
+    // try {
+    //   const { data } = await addBudget({
+    //     variables: {
+    //       userId,
+    //       month,
+    //       year,
+    //       total: parseFloat(totalBudget)
+    //     },
+    //   });
+    // } catch (err) {
+    //   console.error(err);
+    // }
+
+    try{
+      const { data } = await updateBudget({
         variables: {
           userId,
           month,
           year,
           total: parseFloat(totalBudget)
-        },
-      });
-    } catch (err) {
+        }
+      })
+    }catch{
       console.error(err);
+
     }
     setShowForm(false);
   };

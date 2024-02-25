@@ -60,3 +60,15 @@ mutation addBudget($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
   }
 }
 `;
+
+export const UPDATE_BUDGET = gql`
+mutation Mutation($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
+  updateBudget(userId: $userId, month: $month, year: $year, total: $total) {
+    userId
+    month
+    year
+    total
+    _id
+  }
+}
+`;
