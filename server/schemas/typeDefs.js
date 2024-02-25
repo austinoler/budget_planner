@@ -44,11 +44,12 @@ const typeDefs = `
   }
 
   type Query {
-    categories: [Category]
     users: [User]
     user(id: ID!): User
     budgets: [Budget]
     budget(userId: ID!, month: Int!, year: Int!): Budget
+    categories: [Category]
+    category(userId: ID!, month: Int!, year: Int!, name: String!): Category
   }
 
   type Mutation {
@@ -57,6 +58,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
     updateBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
+    addCategory(userId: ID!, month: Int!, year: Int!, name: String!, budget: Float!): Category
+    updateCategory(userId: ID!, month: Int!, year: Int!, name: String!, budget: Float!): Category
   }
 `;
 

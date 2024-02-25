@@ -15,11 +15,15 @@ const resolvers = {
     budgets: async () => {
       return await Budget.find();
     },
-    budget: async (parent, {userId, month, year}, context) => {
-     const budget = Budget.findOne({ userId, month, year });
-      return budget;
-      
-    }
+    budget: async (parent, { userId, month, year }, context) => {
+     return await Budget.findOne({ userId, month, year });
+    },
+    categories: async () => {
+      return await Category.find();
+    },
+    category: async (parent, { userId, month, year, name }, context) => {
+      return await Category.findOne({ userId, month, year, name });
+     },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -66,8 +70,17 @@ const resolvers = {
     },
     updateBudget: async ( parent, { userId, month, year, total }) => {
       await Budget.findOneAndUpdate({userId, month, year}, {total});
-      
-    }
+    },
+    addCategory: async ( parent, { userId, month, year, name, budget }) => {
+      const category = await Category.create({ userId, month, year , name, budget });
+      const update = await Budget.findOneAndUpdate({ userId, month, year }, { $addToSet: { categories : category._id } }, { new: true }).populate('categories');
+      console.log(update);
+      return category;
+    },
+    updateCategory: async ( parent, { userId, month, year, name, budget }) => {
+      await Category.findOneAndUpdate({ userId, month, year, name }, { budget });
+    },
+   
 
   }
 };
