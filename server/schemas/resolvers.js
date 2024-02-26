@@ -10,12 +10,14 @@ const resolvers = {
       return await User.find();
     },
     user: async (parent, args) => {
-      return await User.findById({ _id: args.id });
+      console.log(args);
+      return await User.findById({ _id: args._id }).populate('budgets');
     },
     budgets: async () => {
       return await Budget.find();
     },
     budget: async (parent, { userId, month, year }) => {
+      console.log(userId, month, year);
       return await Budget.findOne({ userId, month, year });
     },
     categories: async () => {

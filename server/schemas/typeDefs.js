@@ -46,7 +46,7 @@ const typeDefs = `
 
   type Query {
     users: [User]
-    user(id: ID!): User
+    user(_id: ID!): User
     budgets: [Budget]
     budget(userId: ID!, month: Int!, year: Int!): Budget
     categories: [Category]
