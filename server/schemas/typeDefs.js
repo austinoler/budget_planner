@@ -35,7 +35,8 @@ const typeDefs = `
     month: Int!
     year: Int!
     amount: Float!
-    description: String
+    description: String!
+    recurring: Boolean!
   }
  
   type Auth {
@@ -50,6 +51,8 @@ const typeDefs = `
     budget(userId: ID!, month: Int!, year: Int!): Budget
     categories: [Category]
     category(userId: ID!, month: Int!, year: Int!, name: String!): Category
+    expenses: [Expense]
+    expense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, recurring: Boolean!): Expense
   }
 
   type Mutation {
@@ -60,6 +63,9 @@ const typeDefs = `
     updateBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
     addCategory(userId: ID!, month: Int!, year: Int!, name: String!, budget: Float!): Category
     updateCategory(userId: ID!, month: Int!, year: Int!, name: String!, budget: Float!): Category
+    addExpense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, description: String!, recurring: Boolean!): Expense
+    updateExpense(_id: ID!, amount: Float, description: String, recurring: Boolean): Expense
+    deleteExpense(_id:ID!): Expense
   }
 `;
 

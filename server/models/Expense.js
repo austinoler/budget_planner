@@ -38,6 +38,10 @@ const expenseSchema = new Schema({
     required: true,
     trim: true
   },
+  recurring: {
+    type: Boolean,
+    required: true,
+  }
 
 });
 
