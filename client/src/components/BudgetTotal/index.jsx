@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
-
+import { useMutation } from '@apollo/client';
+import { ADD_BUDGET, UPDATE_BUDGET } from '../../utils/mutations';
+import Auth from '../../utils/auth'
 function BudgetTotal() {
   const [totalBudget, setTotalBudget] = useState(null);
   const [showForm, setShowForm] = useState(true);
+  const [updateBudget, { error }] = useMutation (UPDATE_BUDGET);
 
   const handleInputChange = (event) => {
     // Set the total budget
     setTotalBudget(parseFloat(event.target.value).toFixed(2));
+    
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (event) => {
     // Hide the form when the user submits
+    const date = new Date();
+    const month = date.getMonth()+1;
+    const year = date.getFullYear();
+    const userId = Auth.getProfile().data._id
+
+    try{
+      const { data } = await updateBudget({
+        variables: {
+          userId,
+          month,
+          year,
+          total: parseFloat(totalBudget)
+        }
+      })
+    }catch{
+      console.error(err);
+
+    }
     setShowForm(false);
   };
 

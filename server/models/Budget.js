@@ -4,8 +4,17 @@ const { Schema } = mongoose;
 const Category = require('./Category')
 
 const budgetSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   month: {
-    type: String,
+    type: Number,
+    required: true,
+    trim: true
+  },
+  year: {
+    type: Number,
     required: true,
     trim: true
   },
@@ -14,7 +23,10 @@ const budgetSchema = new Schema({
     required: true,
     trim: true
   },
-  category : [Category.schema]
+  categories : [ {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
+  }]
 
 });
 
