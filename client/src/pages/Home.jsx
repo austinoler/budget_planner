@@ -17,8 +17,9 @@ const Home = () => {
 
   if (!Auth.loggedIn()) {
     return (
-      <div>
+      <div className="row">
         <Login/>
+        <h2 className= "col-1 text-center">Or</h2>
         <Signup/>
       </div>
       )
