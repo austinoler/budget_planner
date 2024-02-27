@@ -4,8 +4,27 @@ const { Schema } = mongoose;
 
 
 const expenseSchema = new Schema({
-  date: {
-    type: Date,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  categoryName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  day: {
+    type: Number,
+    required: true,
+    trim: true
+  },
+  month: {
+    type: Number,
+    required: true,
+    trim: true
+  },
+  year: {
+    type: Number,
     required: true,
     trim: true
   },
@@ -18,6 +37,10 @@ const expenseSchema = new Schema({
     type: String,
     required: true,
     trim: true
+  },
+  recurring: {
+    type: Boolean,
+    required: true,
   }
 
 });

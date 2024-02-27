@@ -25,7 +25,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  budget : [Budget.schema]
+  budgets : [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Budget'
+  }]
 });
 
 // set up pre-save middleware to create password

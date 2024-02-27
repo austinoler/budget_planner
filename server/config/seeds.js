@@ -8,7 +8,7 @@ db.once('open', async () => {
   await cleanDB('User', 'users');
 
   const categories = await Category.insertMany([
-    { name: 'Food' },
+    { name: 'Food' , amount: 50 },
   
   ]);
 
