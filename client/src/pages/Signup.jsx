@@ -31,8 +31,8 @@ function Signup(props) {
   };
 
   return (
-    <div className="col border border-3 border-success rounded container my-1 p-4">
-      <h2>Signup</h2>
+    <div className="col-5 border border-3 border-success rounded container p-4">
+      <h2 className="fw-bolder">SIGNUP</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
           <label htmlFor="firstName">First Name:</label>

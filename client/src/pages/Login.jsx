@@ -30,27 +30,33 @@ function Login(props) {
   };
 
   return (
-    <div className="col border border-3 border-success rounded container my-1 p-4">
-      <h2>Login</h2>
+    <div className="col-5 border border-3 border-success rounded container p-4">
+      <h2 className="fw-bolder">LOGIN</h2>
       <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
+        <div className="row-flex my-2">
+          <label htmlFor="email" className="col-2 w-10">
+            <i className="bi bi-envelope-fill"></i>
+          </label>
           <input
-            placeholder="youremail@test.com"
+            placeholder="email@example.com"
             name="email"
             type="email"
             id="email"
             onChange={handleChange}
+            className="col-10"
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
+        <div className="row-flex my-2">
+          <label htmlFor="pwd" className="col-2">
+            <i className="bi bi-lock-fill"></i>
+          </label>
           <input
-            placeholder="******"
+            placeholder="Password"
             name="password"
             type="password"
             id="pwd"
             onChange={handleChange}
+            className="col-10"
           />
         </div>
         {error ? (

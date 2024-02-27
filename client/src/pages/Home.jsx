@@ -19,7 +19,7 @@ const Home = () => {
     return (
       <div className="row">
         <Login/>
-        <h2 className= "col-1 align-self-center">Or</h2>
+        <h2 className= "col-2 align-self-center">Or</h2>
         <Signup/>
       </div>
       )
@@ -72,7 +72,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container row">
+    <div className="row w-100">
       <BudgetTotal />
       <BudgetTable expenses={expenses} />
       <ExpensesForm onSubmit={handleExpenseSubmit} />
