@@ -8,6 +8,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER, QUERY_BUDGET } from '../utils/queries';
 import Auth from '../utils/auth'
 import Signup from './Signup';
+import Login from './Login';
 import { ADD_BUDGET } from '../utils/mutations';
 
 
@@ -15,7 +16,12 @@ import { ADD_BUDGET } from '../utils/mutations';
 const Home = () => {
 
   if (!Auth.loggedIn()) {
-    return <Signup></Signup>
+    return (
+      <div>
+        <Login/>
+        <Signup/>
+      </div>
+      )
   }
 
   const [budget, setBudget] = useState(null);
