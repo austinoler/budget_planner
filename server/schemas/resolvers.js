@@ -10,18 +10,16 @@ const resolvers = {
       return await User.find();
     },
     user: async (parent, args) => {
-      console.log(args);
       return await User.findById({ _id: args._id }).populate('budgets');
     },
     budgets: async () => {
-      return await Budget.find();
+      return await Budget.find().populate('categories');
     },
     budget: async (parent, { userId, month, year }) => {
-      console.log(userId, month, year);
       return await Budget.findOne({ userId, month, year });
     },
     categories: async () => {
-      return await Category.find();
+      return await Category.find().populate('expenses');
     },
     category: async (parent, { userId, month, year, name }) => {
       return await Category.findOne({ userId, month, year, name });
@@ -66,7 +64,6 @@ const resolvers = {
     },
     addBudget: async (parent, { userId, month, year, total }, context) => {
       if (context.user) {
-
         const budget = await Budget.create({ userId, month, year, total });
         console.log(budget);
         const user = await User.findOneAndUpdate({ _id: context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true }).populate('budgets');
