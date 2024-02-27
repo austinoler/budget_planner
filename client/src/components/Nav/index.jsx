@@ -20,22 +20,19 @@ function Nav() {
           </li>
         </ul>
       );
+
     }
   }
 
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          Money Master
-        </Link>
-      </h1>
-
-      <nav>
+    <div className="row shadow-sm mb-4">
+    <header className="col-6">
+      <img src="./src/assets/images/money-master-logo.jpeg" alt="Money Master Logo" className="w-100"></img>
+      <nav className="col-6">
         {showNavigation()}
       </nav>
     </header>
+    </div>
   );
 }
 

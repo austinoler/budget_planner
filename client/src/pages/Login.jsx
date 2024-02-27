@@ -30,7 +30,7 @@ function Login(props) {
   };
 
   return (
-    <div className="col border container my-1">
+    <div className="col border border-3 border-success rounded container my-1 p-4">
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
@@ -55,7 +55,7 @@ function Login(props) {
         </div>
         {error ? (
           <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+            <p className="error-text">Incorrect Login I</p>
           </div>
         ) : null}
         <div className="flex-row flex-end">

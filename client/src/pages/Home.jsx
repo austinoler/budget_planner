@@ -19,7 +19,7 @@ const Home = () => {
     return (
       <div className="row">
         <Login/>
-        <h2 className= "col-1 text-center">Or</h2>
+        <h2 className= "col-1 align-self-center">Or</h2>
         <Signup/>
       </div>
       )
