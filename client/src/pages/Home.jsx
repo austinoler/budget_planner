@@ -17,22 +17,24 @@ const Home = () => {
   if (!Auth.loggedIn()) {
     return <Signup></Signup>
   }
-  // var budget;
 
-  // useEffect(() => {
-  //   // Check if the current loggedin user has a budget for this month. If not, create one with default amount of 500
-  //   var userId = Auth.getProfile().data._id
-  //   const currentDate = new Date;
-  //   const month = currentDate.getMonth() + 1;
-  //   const year = currentDate.getFullYear();
-  //   // check if there is a budget for this month/year
-  //   const { loading, data } = useQuery(QUERY_BUDGET, {
-  //     variables: { userId, month, year }
-  //   });
-  //   if (loading) {
-  //     return <h1>Loading...</h1>
-  //   }
-  //   console.log(data.budget);
+  const [budget, setBudget] = useState(null);
+
+  useEffect(() => {
+    // Check if the current loggedin user has a budget for this month. If not, create one with default amount of 500
+    var userId = Auth.getProfile().data._id
+    const currentDate = new Date;
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    // check if there is a budget for this month/year
+
+    // const { loading, data } = useQuery(QUERY_BUDGET, {
+    //   variables: { userId, month, year }
+    // });
+    // if (loading) {
+    //   return <h1>Loading...</h1>
+    // }
+    // console.log(data.budget);
   //   // if budget exists then send the total to budgetTotal component else create one with default value of 500
   //   if (data.budget) {
   //     budget = data.budget.total
@@ -55,7 +57,7 @@ const Home = () => {
   //     // });
   //     budget = 500;
   //   }
-  // }, []);
+  }, []);
 
   const [expenses, setExpenses] = useState([]);
   const handleExpenseSubmit = (expense) => {
