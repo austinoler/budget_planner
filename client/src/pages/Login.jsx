@@ -30,10 +30,10 @@ function Login(props) {
   };
 
   return (
-    <div className="col-5 border border-3 border-success rounded container p-4">
-      <h2 className="fw-bolder">LOGIN</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="row-flex my-2">
+    <div className="col-5 border border-1 border-success rounded p-4">
+      <h2 className="border border-1 border-success rounded"><i className="bi bi-person-check-fill"></i> LOGIN</h2>
+      <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">
+        <div className="my-3">
           <label htmlFor="email" className="col-2 w-10">
             <i className="bi bi-envelope-fill"></i>
           </label>
@@ -46,7 +46,7 @@ function Login(props) {
             className="col-10"
           />
         </div>
-        <div className="row-flex my-2">
+        <div className="my-3">
           <label htmlFor="pwd" className="col-2 w-10">
             <i className="bi bi-lock-fill"></i>
           </label>
@@ -61,11 +61,12 @@ function Login(props) {
         </div>
         {error ? (
           <div>
-            <p className="error-text">Incorrect Login I</p>
+            <p className="error-text">Incorrect Login Information!</p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+        <br/><br/><br/><br/>
+        <div className="flex flex-end mt-1">
+          <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>
     </div>

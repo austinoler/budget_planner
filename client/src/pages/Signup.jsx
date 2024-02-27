@@ -31,12 +31,13 @@ function Signup(props) {
   };
 
   return (
-    <div className="col-5 border border-3 border-success rounded container p-4">
-      <h2 className="fw-bolder">SIGNUP</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row my-2">
+    <div className="col-5 border border-1 border-success rounded p-4">
+      <h2 className="border border-1 border-success rounded"><i className="bi bi-person-plus-fill"></i> SIGNUP</h2>
+      <i className="bi bi-person-fill-add"></i>
+      <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">
+        <div className="my-3">
           <label htmlFor="firstName" className="col-2 w-10">
-            <i className="bi bi-person-lines-fill"></i>
+            <i className="bi bi-person-badge"></i>
           </label>
           <input
             placeholder="First Name"
@@ -47,9 +48,9 @@ function Signup(props) {
             className="col-10"
           />
         </div>
-        <div className="flex-row my-2">
+        <div className="my-3">
           <label htmlFor="lastName" className="col-2 w-10">
-            <i className="bi bi-person-lines-fill"></i>
+            <i className="bi bi-person-badge-fill"></i>
           </label>
           <input
             placeholder="Last Name"
@@ -60,7 +61,7 @@ function Signup(props) {
             className="col-10"
           />
         </div>
-        <div className="flex-row my-2">
+        <div className="my-3">
           <label htmlFor="email" className="col-2 w-10">
             <i className="bi bi-envelope-fill"></i>
           </label>
@@ -73,7 +74,7 @@ function Signup(props) {
             className="col-10"
           />
         </div>
-        <div className="flex-row my-2">
+        <div className="my-3">
           <label htmlFor="pwd" className="col-2 w-10">
             <i className="bi bi-lock-fill"></i>
           </label>
@@ -86,8 +87,8 @@ function Signup(props) {
             className="col-10"
           />
         </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+        <div className="flex flex-end">
+          <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>
     </div>

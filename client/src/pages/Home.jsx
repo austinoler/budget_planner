@@ -17,9 +17,9 @@ const Home = () => {
 
   if (!Auth.loggedIn()) {
     return (
-      <div className="row">
+      <div className="row shadow rounded border border-3 p-4">
         <Login/>
-        <h2 className= "col-2 align-self-center">Or</h2>
+        <h2 className= "col-2 align-self-center">OR</h2>
         <Signup/>
       </div>
       )
@@ -72,7 +72,7 @@ const Home = () => {
   };
 
   return (
-    <div className="row w-100">
+    <div className="row shadow rounded border border-3 p-4">
       <BudgetTotal />
       <BudgetTable expenses={expenses} />
       <ExpensesForm onSubmit={handleExpenseSubmit} />
