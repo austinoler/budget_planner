@@ -47,7 +47,7 @@ function Login(props) {
           />
         </div>
         <div className="row-flex my-2">
-          <label htmlFor="pwd" className="col-2">
+          <label htmlFor="pwd" className="col-2 w-10">
             <i className="bi bi-lock-fill"></i>
           </label>
           <input
