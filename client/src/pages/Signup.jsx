@@ -31,7 +31,7 @@ function Signup(props) {
   };
 
   return (
-    <div className="col-5 border border-1 border-success rounded p-4">
+    <div className="col-5 border border-1 border-success rounded p-4 shadow">
       <h2 className="border border-1 border-success rounded"><i className="bi bi-person-plus-fill"></i> SIGNUP</h2>
       <i className="bi bi-person-fill-add"></i>
       <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">

@@ -11,11 +11,11 @@ function TransactionsTable({ expenses }) {
   }, {});
 
   return ( 
-    <div>
-      <div className="fs-3">Transactions</div>
+    <div className="w-50 border border-1 border-success rounded p-4 mb-4 shadow">
+      <h2>Transactions</h2>
       <div id="accordion">
         {Object.entries(groupedExpenses).map(([category, categoryExpenses], index) => (
-          <div key={index} className="card w-50">
+          <div key={index} className="card w-100">
             <div className="card-header" id={`heading${index}`}>
               <h5 className="mb-0">
                 <button className="btn btn-link" data-toggle="collapse" data-target={`#collapse${index}`} aria-expanded="true" aria-controls={`collapse${index}`}>

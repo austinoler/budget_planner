@@ -37,6 +37,7 @@ function BudgetTable() {
   };
 
   return (
+    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
     <table className="table">
       <thead>
         <tr className="col">
@@ -72,6 +73,7 @@ function BudgetTable() {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
 

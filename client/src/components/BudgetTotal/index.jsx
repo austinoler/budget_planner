@@ -45,9 +45,9 @@ function BudgetTotal() {
     <>
       {/* Conditional rendering to show/hide the form */}
       {showForm ? (
-        <div className="form justify-content-center">
+        <div className="form justify-content-center border border-success rounded p-4 mb-4 shadow">
           <div className="form-Group text-center">
-            <label htmlFor="inputBudget" className="fs-2">This Month's Budget:</label>
+            <h2><label htmlFor="inputBudget">This Month's Budget:</label></h2>
             <div className="row justify-content-center">
               <span className="col-1 w-auto fs-4">$</span>
               <span className="col-2 w-25">
