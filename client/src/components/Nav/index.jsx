@@ -20,37 +20,19 @@ function Nav() {
           </li>
         </ul>
       );
-    } else {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">
-              Signup
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
-      );
+
     }
   }
 
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          Money Master
-        </Link>
-      </h1>
-
-      <nav>
+    <div className="row shadow rounded border border-3 mb-4">
+    <header className="col-6">
+      <img src="./src/assets/images/money-master-logo.jpeg" alt="Money Master Logo" className="w-100"></img>
+      <nav className="col-6">
         {showNavigation()}
       </nav>
     </header>
+    </div>
   );
 }
 
