@@ -3,7 +3,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_CATEGORY } from '../../utils/queries';
 import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
 import AuthService from '../../utils/auth';
-import '../../App.css';
 
 function BudgetTable() {
   const [editingCategory, setEditingCategory] = useState(null);
@@ -14,14 +13,14 @@ function BudgetTable() {
     Misc: ''
   });
 
-  const { loading, error, data } = useQuery(QUERY_CATEGORY, {
-    variables: {
-      userId: AuthService.getUserId(),
-      month: new Date().getMonth() + 1,
-      year: new Date().getFullYear(),
-    }
-  });
-
+  // const { loading, error, data } = useQuery(QUERY_CATEGORY, {
+  //   variables: {
+  //     userId: AuthService.getUserId(),
+  //     month: new Date().getMonth() + 1,
+  //     year: new Date().getFullYear(),
+  //   }
+  // });
+  
   const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
 
   useEffect(() => {

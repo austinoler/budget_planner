@@ -54,3 +54,13 @@ export function idbPromise(storeName, method, object) {
     };
   });
 }
+
+export function getExpenses(categories) {
+  const expenses = [];
+  for(var x=0; x<categories.length; x++){
+    for(var y=0; y<categories[x].expenses.length; y++){
+      expenses.push(categories[x].expenses[y])
+    }
+  }
+  return expenses;
+}

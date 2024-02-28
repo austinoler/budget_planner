@@ -20,19 +20,19 @@ function BudgetTotal(props) {
     const year = date.getFullYear();
     const userId = Auth.getProfile().data._id
 
-    try{
-      const { data } = await updateBudget({
-        variables: {
-          userId,
-          month,
-          year,
-          total: parseFloat(totalBudget)
-        }
-      })
-    }catch (err){
-      console.error(err);
+    // try{
+    //   const { data } = await updateBudget({
+    //     variables: {
+    //       userId,
+    //       month,
+    //       year,
+    //       total: parseFloat(totalBudget)
+    //     }
+    //   })
+    // }catch (err){
+    //   console.error(err);
 
-    }
+    // }
     setShowForm(false);
   };
 
