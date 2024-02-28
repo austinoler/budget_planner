@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_BUDGET, UPDATE_BUDGET } from '../../utils/mutations';
+import { QUERY_BUDGET } from '../../utils/queries';
+
 import Auth from '../../utils/auth'
 function BudgetTotal(props) {
   const [totalBudget, setTotalBudget] = useState(null);
   const [showForm, setShowForm] = useState(true);
-  const [updateBudget, { error }] = useMutation (UPDATE_BUDGET);
+  const [updateBudget, { error }] = useMutation(UPDATE_BUDGET);
 
   const handleInputChange = (event) => {
     // Set the total budget
     setTotalBudget(parseFloat(event.target.value).toFixed(2));
-    
+
   };
-  console.log('prop: ' + props.budget + ' budget: ' + totalBudget);
+  const { loading, data } = useQuery(QUERY_BUDGET, {
+    variables: { id: props.id },
+  });
+  console.log(data);
+  useEffect(() => {
+    if (!loading) {
+      setTotalBudget(data.budget.total)
+    }
+  }, [data])
+
+  console.log('prop: ' + props.id + ' budget: ', totalBudget);
+
   const handleSubmit = async (event) => {
     // Hide the form when the user submits
     const date = new Date();
-    const month = date.getMonth()+1;
+    const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const userId = Auth.getProfile().data._id
 
@@ -58,7 +71,7 @@ function BudgetTotal(props) {
                   onChange={handleInputChange}
                   className="form-control"
                   id="inputBudget"
-                  placeholder={props.budget ? props.budget : 'Enter Budget'}
+                  placeholder={totalBudget ? totalBudget : 'Enter Budget'}
                 />
               </span>
               <span className="col-1 w-auto">
@@ -69,11 +82,11 @@ function BudgetTotal(props) {
           </div>
         </div>
       ) : (
-        <div>
+        <div className= "justify-content-center border border-success rounded p-4 mb-4 shadow">
           {/* Display the message once the budget has been submitted */}
-          <p>You have entered a budget of ${totalBudget}</p>
+          <p className=" text-center">You have entered a budget of ${totalBudget}</p>
           {/* Show the edit button */}
-          <i className="bi bi-pencil-square" onClick={handleEditClick}></i>
+          <i className=" bi bi-pencil-square" onClick={handleEditClick}></i>
         </div>
       )}
     </>

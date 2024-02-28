@@ -10,20 +10,27 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGET } from '../utils/queries';
 import { ADD_BUDGET } from '../utils/mutations';
 import { useParams } from 'react-router-dom';
+import { getExpenses } from '../utils/helpers';
 
 const Home = () => {
-  const { id } = useParams();
-  const { loading, data: budget, error } = useQuery(QUERY_BUDGET, {
-    variables: { id },
-  });
 
-  if (loading) {
-    return (<h1>Loading . . .</h1>)
-  }
-  console.log(budget);
-  if(error){
-    console.error(error);
-  }
+  const { id } = useParams();
+  //   console.log('id: ', id);
+
+  //   const { loading, data } = useQuery(QUERY_BUDGET, {
+  //       variables: { id },
+  //   }); 
+ 
+  //   console.log('data: ', data.budget.total);
+    // const categoriesData = data.budget.categories
+   
+    // const expensesData = getExpenses(categoriesData);
+    // console.log('categories', categories);
+    // console.log('expenses', expensesData);
+
+
+
+
 
   if (!Auth.loggedIn()) {
     return (
@@ -34,7 +41,7 @@ const Home = () => {
       </div>
     );
   }
-  
+
   // Check if the current loggedin user has a budget for this month. If not, create one with default amount of 500
   var userId = Auth.getProfile().data._id
   const currentDate = new Date;
@@ -72,7 +79,7 @@ const Home = () => {
 
   return (
     <div className="row shadow rounded border border-3 p-4">
-      <BudgetTotal />
+      <BudgetTotal id= {id}/>
       <BudgetTable expenses={expenses} />
       <ExpensesForm onSubmit={handleExpenseSubmit} />
       <TransactionsTable expenses={expenses} />
