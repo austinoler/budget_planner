@@ -30,38 +30,43 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
-
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
+    <div className="col-5 border border-1 border-success rounded p-4">
+      <h2 className="border border-1 border-success rounded"><i className="bi bi-person-check-fill"></i> LOGIN</h2>
+      <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">
+        <div className="my-3">
+          <label htmlFor="email" className="col-2 w-10">
+            <i className="bi bi-envelope-fill"></i>
+          </label>
           <input
-            placeholder="youremail@test.com"
+            placeholder="email@example.com"
             name="email"
             type="email"
             id="email"
             onChange={handleChange}
+            className="col-10"
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
+        <div className="my-3">
+          <label htmlFor="pwd" className="col-2 w-10">
+            <i className="bi bi-lock-fill"></i>
+          </label>
           <input
-            placeholder="******"
+            placeholder="Password"
             name="password"
             type="password"
             id="pwd"
             onChange={handleChange}
+            className="col-10"
           />
         </div>
         {error ? (
           <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+            <p className="error-text">Incorrect Login Information!</p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+        <br/><br/><br/><br/>
+        <div className="flex flex-end mt-1">
+          <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>
     </div>

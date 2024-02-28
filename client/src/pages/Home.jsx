@@ -8,6 +8,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER, QUERY_BUDGET } from '../utils/queries';
 import Auth from '../utils/auth'
 import Signup from './Signup';
+import Login from './Login';
 import { ADD_BUDGET } from '../utils/mutations';
 
 
@@ -15,7 +16,13 @@ import { ADD_BUDGET } from '../utils/mutations';
 const Home = () => {
 
   if (!Auth.loggedIn()) {
-    return <Signup></Signup>
+    return (
+      <div className="row shadow rounded border border-3 p-4">
+        <Login/>
+        <h2 className= "col-2 align-self-center">OR</h2>
+        <Signup/>
+      </div>
+      )
   }
 
   const [budget, setBudget] = useState(null);
@@ -65,7 +72,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container row">
+    <div className="row shadow rounded border border-3 p-4">
       <BudgetTotal />
       <BudgetTable expenses={expenses} />
       <ExpensesForm onSubmit={handleExpenseSubmit} />
