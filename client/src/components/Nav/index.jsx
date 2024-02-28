@@ -27,7 +27,7 @@ function Nav() {
   return (
     <div className="row shadow rounded border border-3 mb-4">
     <header className="col-6">
-      <img src="./src/assets/images/money-master-logo.jpeg" alt="Money Master Logo" className="w-100"></img>
+      <img src="./src/assets/images/moneymasterlogo.jpeg" alt="Money Master Logo" className="w-100"></img>
       <nav className="col-6">
         {showNavigation()}
       </nav>
