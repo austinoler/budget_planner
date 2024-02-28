@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-query User($id: ID!) {
+query Query($id: ID!) {
   user(_id: $id) {
     _id
     firstName
@@ -15,6 +15,7 @@ query User($id: ID!) {
       total
       categories {
         _id
+    
       }
     }
   }
@@ -38,7 +39,7 @@ query User {
 }`;
 
 export const QUERY_BUDGET = gql`
-query Budget($id: ID!) {
+query Expense($id: ID!) {
   budget(_id: $id) {
     _id
     userId
@@ -50,6 +51,17 @@ query Budget($id: ID!) {
       userId
       name
       budget
+      expenses {
+        _id
+        userId
+        categoryName
+        day
+        month
+        year
+        amount
+        description
+        recurring
+      }
     }
   }
 }`;

@@ -16,13 +16,13 @@ const resolvers = {
       return await Budget.find().populate('categories');
     },
     budget: async (parent, args) => {
-      return await Budget.findById({ _id: args._id }).populate('categories');
+      return await Budget.findById({ _id: args._id }).populate({path:'categories', populate: {path: 'expenses', model: 'Expense'}});
     },
     categories: async () => {
       return await Category.find().populate('expenses');
     },
     category: async (parent, args ) => {
-      return await Category.findOne({ _id: args._id });
+      return await Category.findOne({ _id: args._id }).populate('expenses');
     },
     expenses: async () => {
       return await Expense.find();

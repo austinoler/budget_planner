@@ -6,14 +6,19 @@ import { QUERY_USER, QUERY_BUDGET } from '../utils/queries';
 const Budget = () => {
     const { id } = useParams();
     console.log(id);
-    const { loading, data } = useQuery(QUERY_BUDGET, {
+    const { loading, data: budget } = useQuery(QUERY_BUDGET, {
+        variables: { id },
+    });
+    const { isLoading, data } = useQuery(QUERY_BUDGET, {
         variables: { id },
     });
 
-    if(loading){
+    if(loading || isLoading){
         return (<h1>Loading . . .</h1>)
     }
-    console.log(data);
+    
+
+    console.log(budget);
 }   
 
 export default Budget;
