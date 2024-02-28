@@ -63,12 +63,9 @@ const resolvers = {
       return { token, user };
     },
     addBudget: async (parent, { userId, month, year, total }, context) => {
-      if (context.user) {
         const budget = await Budget.create({ userId, month, year, total });
-        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true });
+        const user = await User.findOneAndUpdate({ _id: userId }, { $addToSet: { budgets: budget._id } }, { new: true });
         return budget;
-      }
-      throw AuthenticationError;
     },
     updateBudget: async (parent, { _id, total }) => {
       await Budget.findOneAndUpdate({  _id: _id }, { total });
