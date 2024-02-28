@@ -63,7 +63,7 @@ const typeDefs = `
     updateCategory(_id:ID!, budget: Float!): Category
     addExpense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, description: String!, recurring: Boolean!, categoryId: ID!): Expense
     updateExpense(_id: ID!, amount: Float, description: String, recurring: Boolean): Expense
-    deleteExpense(_id:ID!): Expense
+    deleteExpense(_id:ID!, categoryId: ID!): Expense
   }
 `;
 
