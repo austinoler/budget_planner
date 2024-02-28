@@ -20,8 +20,6 @@ const typeDefs = `
   type Category {
     _id: ID
     userId: ID!
-    month: Int!
-    year: Int!
     name: String!
     budget: Float!
     expenses: [Expense]
@@ -48,11 +46,11 @@ const typeDefs = `
     users: [User]
     user(_id: ID!): User
     budgets: [Budget]
-    budget(userId: ID!, month: Int!, year: Int!): Budget
+    budget(_id: ID!): Budget
     categories: [Category]
-    category(userId: ID!, month: Int!, year: Int!, name: String!): Category
+    category(_id: ID!): Category
     expenses: [Expense]
-    expense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, recurring: Boolean!): Expense
+    expense(_id: ID!): Expense
   }
 
   type Mutation {
@@ -60,10 +58,10 @@ const typeDefs = `
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
     addBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
-    updateBudget(userId: ID!, month: Int!, year: Int!, total: Float!): Budget
-    addCategory(userId: ID!, month: Int!, year: Int!, name: String!, budget: Float!): Category
-    updateCategory(userId: ID!, month: Int!, year: Int!, name: String!, budget: Float!): Category
-    addExpense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, description: String!, recurring: Boolean!): Expense
+    updateBudget(_id: ID!, total: Float!): Budget
+    addCategory(userId: ID!, name: String!, budget: Float!, budgetId: ID!): Category
+    updateCategory(_id:ID!, budget: Float!): Category
+    addExpense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, description: String!, recurring: Boolean!, categoryId: ID!): Expense
     updateExpense(_id: ID!, amount: Float, description: String, recurring: Boolean): Expense
     deleteExpense(_id:ID!): Expense
   }

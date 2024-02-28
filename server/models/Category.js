@@ -8,16 +8,6 @@ const categorySchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  month: {
-    type: Number,
-    required: true,
-    trim: true
-  },
-  year: {
-    type: Number,
-    required: true,
-    trim: true
-  },
   name: {
     type: String,
     required: true,
