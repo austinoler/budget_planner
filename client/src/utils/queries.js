@@ -32,12 +32,16 @@ query Query {
 }`;
 
 export const QUERY_BUDGET = gql`
-query Query($userId: ID!, $month: Int!, $year: Int!) {
-  budget(userId: $userId, month: $month, year: $year) {
+query Query($id: ID!) {
+  budget(_id: $id) {
     _id
-    total
+    userId
     month
     year
+    total
+    categories {
+      _id
+    }
   }
 }`;
 
@@ -56,8 +60,8 @@ query Query {
 }`;
 
 export const QUERY_CATEGORY = gql`
-query Query($userId: ID!, $month: Int!, $year: Int!, $name: String!) {
-  category(userId: $userId, month: $month, year: $year, name: $name) {
+query Category($id: ID!) {
+  category(_id: $id) {
     _id
     userId
     month
@@ -86,8 +90,8 @@ query Categories {
 }`;
 
 export const QUERY_EXPENSE = gql`
-query Expense($userId: ID!, $categoryName: String!, $day: Int!, $month: Int!, $year: Int!, $amount: Float!, $recurring: Boolean!) {
-  expense(userId: $userId, categoryName: $categoryName, day: $day, month: $month, year: $year, amount: $amount, recurring: $recurring) {
+query Query($id: ID!) {
+  expense(_id: $id) {
     _id
     userId
     categoryName

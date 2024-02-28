@@ -7,7 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch.jsx'
-
+import Dashboard from './pages/Dashboard.jsx';
+import Budget from './pages/Budget.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -15,7 +16,15 @@ const router = createBrowserRouter([
     error: <NoMatch />,
     children: [
       {
-        index: true, 
+        index: true,
+        element: <Dashboard />
+      },
+      {
+        path: '/budget/:id',
+        element: <Budget/>
+      },
+      {
+        path: '/',
         element: <Home />
       }, {
         path: '/login',
