@@ -16,9 +16,11 @@ const Budget = () => {
     }
     
     const categories = budget.budget.categories
-    console.log(categories);
+   
     const expenses = getExpenses(categories);
+    console.log('categories', categories);
+    console.log('expenses', expenses);
  
-}   
+}  
 
 export default Budget;
