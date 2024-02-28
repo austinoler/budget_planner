@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_CATEGORY } from '../../utils/queries';
-import { UPDATE_BUDGET } from '../../utils/mutations';
+import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
 import AuthService from '../../utils/auth';
 import '../../App.css';
 
@@ -22,7 +22,7 @@ function BudgetTable() {
     }
   });
 
-  const [updateBudget] = useMutation(UPDATE_BUDGET);
+  const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
 
   useEffect(() => {
     if (data) {
@@ -45,21 +45,18 @@ function BudgetTable() {
     }));
   };
 
-  const handleBlur = async (category) => {
+  const handleBlur = async (category, categoryId) => { // Pass categoryId as argument
     setEditingCategory(null);
 
     try {
-      await updateBudget({
+      await updateCategory({
         variables: {
-          userId: AuthService.getUserId(),
-          month: new Date().getMonth() + 1,
-          year: new Date().getFullYear(),
-          name: category,
-          budget: parseFloat(newBudgets[category])
+          _id: categoryId, // Pass categoryId to updateCategory mutation
+          budget: parseFloat(newBudgets[category]) // Convert input value to float
         }
       });
     } catch (error) {
-      console.error('Error updating budget:', error);
+      console.error('Error updating category budget:', error);
     }
   };
 
@@ -68,44 +65,13 @@ function BudgetTable() {
 
   return (
     <table className="table">
-      <thead>
-        <tr className="col">
-          <th scope="col" className="w-25">Category</th>
-          <th scope="col" className="w-25">Budget $</th>
-          <th scope="col" className="w-25">Expenses $</th>
-          <th scope="col" className="w-25">Budget Variance $</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(newBudgets).map((category) => (
-          <tr key={category}>
-            <th scope="row">{category}</th>
-            <td
-              onClick={() => handleBudgetClick(category)}
-              className={editingCategory === category ? '' : 'hover-effect'}
-            >
-              {editingCategory === category ? (
-                <input
-                  type="number"
-                  value={newBudgets[category]}
-                  onChange={(e) => handleInputChange(e, category)}
-                  onBlur={() => handleBlur(category)}
-                  autoFocus
-                />
-              ) : (
-                newBudgets[category]
-              )}
-            </td>
-            <td>0000</td>
-            <td>0000</td>
-          </tr>
-        ))}
-      </tbody>
+      {/* Table body */}
     </table>
   );
 }
 
 export default BudgetTable;
+
 
 
 
