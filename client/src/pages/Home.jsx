@@ -17,16 +17,16 @@ const Home = () => {
   const { id } = useParams();
   //   console.log('id: ', id);
 
-  //   const { loading, data } = useQuery(QUERY_BUDGET, {
-  //       variables: { id },
-  //   }); 
- 
-  //   console.log('data: ', data.budget.total);
-    // const categoriesData = data.budget.categories
-   
-    // const expensesData = getExpenses(categoriesData);
-    // console.log('categories', categories);
-    // console.log('expenses', expensesData);
+  const { loading, data } = useQuery(QUERY_BUDGET, {
+    variables: { id },
+  });
+
+  // console.log('data: ', data.budget.total);
+  // const categoriesData = data.budget.categories
+
+  // const expensesData = getExpenses(categoriesData);
+  // console.log('categories', categories);
+  // console.log('expenses', expensesData);
 
 
   // Check if the current loggedin user has a budget for this month. If not, create one with default amount of 500
@@ -58,6 +58,34 @@ const Home = () => {
   //     budget = data.budget.total
   //   }
   // }, [data]);
+  useEffect(() => {
+    if (data) {
+      var housingExpenses = 0, foodExpenses = 0, transportationExpenses = 0, miscExpenses = 0;
+      const categoriesData = data.budget.categories
+      const expensesData = getExpenses(categoriesData);
+      console.log('expenses data:', expensesData);
+      expensesData.forEach(expense => {
+        if(expense.categoryName == 'Housing'){
+          housingExpenses += expense.amount;
+        }else if(expense.categoryName == 'Food'){
+          foodExpenses += expense.amount;
+        }else if(expense.categoryName == 'Transportation'){
+          transportationExpenses += expense.amount;
+        }else if (expense.categoryName == 'Misc'){
+          miscExpenses += expense.amount;
+        }
+      })
+      setExpensesByCat({Housing:housingExpenses, Food: foodExpenses, Transportation: transportationExpenses, Misc: miscExpenses })
+    }
+  }, [data]
+  );
+
+  const [expensesByCat, setExpensesByCat] = useState({
+    Housing: '',
+    Food: '',
+    Transportation: '',
+    Misc: ''
+  });
 
   const [expenses, setExpenses] = useState([]);
   const handleExpenseSubmit = (expense) => {
@@ -66,8 +94,8 @@ const Home = () => {
 
   return (
     <div className="row shadow rounded border border-3 p-4">
-      <BudgetTotal id= {id}/>
-      <BudgetTable expenses={expenses} />
+      <BudgetTotal id={id} />
+      <BudgetTable id={id} expenses={expenses} expensesByCat = {expensesByCat}/>
       <ExpensesForm onSubmit={handleExpenseSubmit} />
       <TransactionsTable expenses={expenses} />
     </div>
