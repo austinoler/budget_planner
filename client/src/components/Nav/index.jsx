@@ -27,7 +27,7 @@ function Nav() {
   return (
     <div className="flex shadow rounded border border-3 mb-4 ">
     <header className="row">
-      <img src="./src/assets/images/money-master-logo.jpeg" alt="Money Master Logo" className="col-8"></img>
+      <img src="./src/assets/images/moneymasterlogo.jpeg" alt="Money Master Logo" className="col-8"></img>
       <nav className="col-4 d-flex align-items-end">
         {showNavigation()}
       </nav>
