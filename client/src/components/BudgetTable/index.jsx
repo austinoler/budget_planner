@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_CATEGORY } from '../../utils/queries';
+import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
+import AuthService from '../../utils/auth';
 import '../../App.css';
 
 function BudgetTable() {
   const [editingCategory, setEditingCategory] = useState(null);
   const [newBudgets, setNewBudgets] = useState({
-    Housing: '1000',
-    Food: '500',
-    Transportation: '300',
-    Misc: '200'
+    Housing: '',
+    Food: '',
+    Transportation: '',
+    Misc: ''
   });
-  const [currentBudgets, setCurrentBudgets] = useState({
-    Housing: '1000',
-    Food: '500',
-    Transportation: '300',
-    Misc: '200'
+
+  const { loading, error, data } = useQuery(QUERY_CATEGORY, {
+    variables: {
+      userId: AuthService.getUserId(),
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
+    }
   });
+
+  const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
+
+  useEffect(() => {
+    if (data) {
+      const initialBudgets = {};
+      data.category.forEach((budget) => {
+        initialBudgets[budget.name] = budget.budget || ''; // Set to empty string if budget is not available
+      });
+      setNewBudgets(initialBudgets);
+    }
+  }, [data]);
 
   const handleBudgetClick = (category) => {
     setEditingCategory(category);
@@ -27,52 +45,35 @@ function BudgetTable() {
     }));
   };
 
-  const handleBlur = (category) => {
-    setCurrentBudgets(prevState => ({
-      ...prevState,
-      [category]: newBudgets[category]
-    }));
+  const handleBlur = async (category, categoryId) => { // Pass categoryId as argument
     setEditingCategory(null);
-     saveBudget(category, newBudgets[category]);
+
+    try {
+      await updateCategory({
+        variables: {
+          _id: categoryId, // Pass categoryId to updateCategory mutation
+          budget: parseFloat(newBudgets[category]) // Convert input value to float
+        }
+      });
+    } catch (error) {
+      console.error('Error updating category budget:', error);
+    }
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
+    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
     <table className="table">
-      <thead>
-        <tr className="col">
-          <th scope="col" className="w-25">Category</th>
-          <th scope="col" className="w-25">Budget $</th>
-          <th scope="col" className="w-25">Expenses $</th>
-          <th scope="col" className="w-25">Budget Variance $</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.entries(currentBudgets).map(([category, budget]) => (
-          <tr key={category}>
-            <th scope="row">{category}</th>
-            <td
-              onClick={() => handleBudgetClick(category)}
-              className={editingCategory === category ? '' : 'hover-effect'}
-            >
-              {editingCategory === category ? (
-                <input
-                  type="number"
-                  value={newBudgets[category]}
-                  onChange={(e) => handleInputChange(e, category)}
-                  onBlur={() => handleBlur(category)}
-                  autoFocus
-                />
-              ) : (
-                budget // Display the current budget value when not in edit mode
-              )}
-            </td>
-            <td>0000</td>
-            <td>0000</td>
-          </tr>
-        ))}
-      </tbody>
+      {/* Table body */}
     </table>
+    </div>
   );
 }
 
 export default BudgetTable;
+
+
+
+
