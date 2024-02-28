@@ -9,13 +9,13 @@ function Nav() {
         <ul className="flex-row">
           <li className="ms-6 list-inline">
             <Link to="/">
-            <h6 className= "fw-bold"><i class="bi bi-cash"></i> My Budgets</h6>
+            <h6 className= "fw-bold"><i className="bi bi-cash"></i> My Budgets</h6>
             </Link>
           </li>
           <li className="ms-4 list-inline">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a href="/" onClick={() => Auth.logout()}>
-              <h6 className= "fw-bold"><i class="bi bi-box-arrow-left"></i> Logout</h6>
+              <h6 className= "fw-bold"><i className="bi bi-box-arrow-left"></i> Logout</h6>
             </a>
           </li>
         </ul>
