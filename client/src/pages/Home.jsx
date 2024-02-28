@@ -35,34 +35,13 @@ const Home = () => {
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
 
-  // const [addBudget, { data: addBudgetData, error }] = useMutation(ADD_BUDGET
-  //   // , {
-  //   //   refetchQueries: [
-  //   //     QUERY_BUDGET,
-  //   //     'getBudget'
-  //   //   ]}
-  // );
-
-  // if budget exists then send the total to budgetTotal component else create one with default value of 500
-  // useEffect(() => {
-  //   if (!data) {
-  //     addBudget({
-  //       variables: {
-  //         userId,
-  //         month,
-  //         year,
-  //         total: 500
-  //       }
-  //     });
-  //   } else {
-  //     budget = data.budget.total
-  //   }
-  // }, [data]);
+  // Gets the expense totals for each category and saves them to state
   useEffect(() => {
     if (data) {
       var housingExpenses = 0, foodExpenses = 0, transportationExpenses = 0, miscExpenses = 0;
       const categoriesData = data.budget.categories
-      const expensesData = getExpenses(categoriesData);
+      const expensesData = getExpenses(categoriesData)
+      setExpenses([...expenses, ...expensesData]);
       console.log('expenses data:', expensesData);
       expensesData.forEach(expense => {
         if(expense.categoryName == 'Housing'){

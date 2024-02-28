@@ -8,14 +8,6 @@ const expenseSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
   categoryName: {
     type: String,
     required: true,
@@ -48,7 +40,8 @@ const expenseSchema = new Schema({
   },
   recurring: {
     type: Boolean,
-    required: true,
+    required: false,
+    default: false
   }
 
 });

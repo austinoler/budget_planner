@@ -16,12 +16,12 @@ const resolvers = {
       return await Budget.find().populate('categories');
     },
     budget: async (parent, args) => {
-      return await Budget.findById({ _id: args._id }).populate({path:'categories', populate: {path: 'expenses', model: 'Expense'}});
+      return await Budget.findById({ _id: args._id }).populate({ path: 'categories', populate: { path: 'expenses', model: 'Expense' } });
     },
     categories: async () => {
       return await Category.find().populate('expenses');
     },
-    category: async (parent, args ) => {
+    category: async (parent, args) => {
       return await Category.findOne({ _id: args._id }).populate('expenses');
     },
     expenses: async () => {
@@ -63,12 +63,12 @@ const resolvers = {
       return { token, user };
     },
     addBudget: async (parent, { userId, month, year, total }, context) => {
-        const budget = await Budget.create({ userId, month, year, total });
-        const user = await User.findOneAndUpdate({ _id: userId }, { $addToSet: { budgets: budget._id } }, { new: true });
-        return budget;
+      const budget = await Budget.create({ userId, month, year, total });
+      const user = await User.findOneAndUpdate({ _id: userId }, { $addToSet: { budgets: budget._id } }, { new: true });
+      return budget;
     },
     updateBudget: async (parent, { _id, total }) => {
-      await Budget.findOneAndUpdate({  _id: _id }, { total });
+      await Budget.findOneAndUpdate({ _id: _id }, { total });
     },
     addCategory: async (parent, { userId, name, budget, budgetId }) => {
       const category = await Category.create({ userId, name, budget });
@@ -80,7 +80,7 @@ const resolvers = {
     },
     addExpense: async (parent, { userId, categoryName, day, month, year, amount, description, recurring, categoryId }) => {
       const expense = await Expense.create({ userId, categoryName, day, month, year, amount, description, recurring });
-      const update = await Category.findOneAndUpdate({ _id : categoryId }, { $addToSet: { expenses: expense._id } }, { new: true });
+      const update = await Category.findOneAndUpdate({ _id: categoryId }, { $addToSet: { expenses: expense._id } }, { new: true });
       return expense;
     },
     updateExpense: async (parent, args) => {
@@ -88,9 +88,9 @@ const resolvers = {
       delete args._id;
       await Expense.findByIdAndUpdate(id, args, { new: true })
     },
-    deleteExpense: async (parent, {_id, categoryId}) => {
-      const result = await Expense.findByIdAndDelete({_id : _id})
-      const update = await Category.findOneAndUpdate({ _id : categoryId }, { $pull: { expenses: _id } }, { new: true });
+    deleteExpense: async (parent, { _id, categoryId }) => {
+      const result = await Expense.findByIdAndDelete({ _id: _id })
+      const update = await Category.findOneAndUpdate({ _id: categoryId }, { $pull: { expenses: _id } }, { new: true });
     }
   }
 }

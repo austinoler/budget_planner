@@ -11,9 +11,9 @@ function ExpensesForm({ onSubmit }) {
       alert('Please fill in all fields.');
       return;
     }
-
+    
     // Pass the expense details to the parent component
-    onSubmit({ category, amount, description });
+    onSubmit({ "categoryName": category, amount, description });
 
     // Clear the form fields after submission
     setCategory('');
