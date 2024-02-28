@@ -30,7 +30,7 @@ function Login(props) {
   };
 
   return (
-    <div className="col-5 border border-1 border-success rounded p-4">
+    <div className="col-5 border border-1 border-success rounded p-4 shadow">
       <h2 className="border border-1 border-success rounded"><i className="bi bi-person-check-fill"></i> LOGIN</h2>
       <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">
         <div className="my-3">
@@ -65,7 +65,7 @@ function Login(props) {
           </div>
         ) : null}
         <br/><br/><br/><br/>
-        <div className="flex flex-end mt-1">
+        <div className="flex flex-end mt-1 mb-3">
           <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>
