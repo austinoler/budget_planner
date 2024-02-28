@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_BUDGET, UPDATE_BUDGET } from '../../utils/mutations';
 import Auth from '../../utils/auth'
-function BudgetTotal() {
+function BudgetTotal(props) {
   const [totalBudget, setTotalBudget] = useState(null);
   const [showForm, setShowForm] = useState(true);
   const [updateBudget, { error }] = useMutation (UPDATE_BUDGET);
@@ -12,7 +12,7 @@ function BudgetTotal() {
     setTotalBudget(parseFloat(event.target.value).toFixed(2));
     
   };
-
+  console.log('prop: ' + props.budget + ' budget: ' + totalBudget);
   const handleSubmit = async (event) => {
     // Hide the form when the user submits
     const date = new Date();
@@ -29,7 +29,7 @@ function BudgetTotal() {
           total: parseFloat(totalBudget)
         }
       })
-    }catch{
+    }catch (err){
       console.error(err);
 
     }
@@ -58,7 +58,7 @@ function BudgetTotal() {
                   onChange={handleInputChange}
                   className="form-control"
                   id="inputBudget"
-                  placeholder="Enter Amount"
+                  placeholder={props.budget ? props.budget : 'Enter Budget'}
                 />
               </span>
               <span className="col-1 w-auto">

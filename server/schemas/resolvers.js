@@ -15,20 +15,20 @@ const resolvers = {
     budgets: async () => {
       return await Budget.find().populate('categories');
     },
-    budget: async (parent, { userId, month, year }) => {
-      return await Budget.findOne({ userId, month, year });
+    budget: async (parent, args) => {
+      return await Budget.findById({ _id: args._id }).populate('categories');
     },
     categories: async () => {
       return await Category.find().populate('expenses');
     },
-    category: async (parent, { userId, month, year, name }) => {
-      return await Category.findOne({ userId, month, year, name });
+    category: async (parent, args ) => {
+      return await Category.findOne({ _id: args._id });
     },
     expenses: async () => {
       return await Expense.find();
     },
-    expense: async (parent, { userId, categoryName, day, month, year, amount, recurring }) => {
-      return await Expense.findOne({ userId, categoryName, day, month, year, amount, recurring });
+    expense: async (parent, args) => {
+      return await Expense.findOne({ _id: args.id });
     }
   },
   Mutation: {
@@ -65,27 +65,27 @@ const resolvers = {
     addBudget: async (parent, { userId, month, year, total }, context) => {
       if (context.user) {
         const budget = await Budget.create({ userId, month, year, total });
-        console.log(budget);
-        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true }).populate('budgets');
-        console.log(user);
+        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $addToSet: { budgets: budget._id } }, { new: true });
         return budget;
       }
       throw AuthenticationError;
     },
-    updateBudget: async (parent, { userId, month, year, total }) => {
-      await Budget.findOneAndUpdate({ userId, month, year }, { total });
+    updateBudget: async (parent, { _id, total }) => {
+      await Budget.findOneAndUpdate({  _id: _id }, { total });
     },
-    addCategory: async (parent, { userId, month, year, name, budget }) => {
-      const category = await Category.create({ userId, month, year, name, budget });
-      const update = await Budget.findOneAndUpdate({ userId, month, year }, { $addToSet: { categories: category._id } }, { new: true }).populate('categories');
+    addCategory: async (parent, { userId, name, budget, budgetId }) => {
+      const category = await Category.create({ userId, name, budget });
+      const update = await Budget.findOneAndUpdate({ _id: budgetId }, { $addToSet: { categories: category._id } }, { new: true });
       return category;
     },
-    updateCategory: async (parent, { userId, month, year, name, budget }) => {
-      await Category.findOneAndUpdate({ userId, month, year, name }, { budget });
+    
+    updateCategory: async (parent, { _id, budget }) => {
+      await Category.findOneAndUpdate({ _id: _id }, { budget });
     },
-    addExpense: async (parent, { userId, categoryName, day, month, year, amount, description, recurring }) => {
+    addExpense: async (parent, { userId, categoryName, day, month, year, amount, description, recurring, categoryId }) => {
       const expense = await Expense.create({ userId, categoryName, day, month, year, amount, description, recurring });
-      const update = await Category.findOneAndUpdate({ userId, month, year, name: categoryName }, { $addToSet: { expenses: expense._id } }, { new: true }).populate('expenses');
+      const update = await Category.findOneAndUpdate({ _id : categoryId }, { $addToSet: { expenses: expense._id } }, { new: true });
+      return expense;
     },
     updateExpense: async (parent, args) => {
       const id = args._id;
