@@ -9,11 +9,6 @@ query Query($id: ID!) {
     email
     budgets {
       _id
-      userId
-      month
-      year
-      total
-     
     }
   }
 }
@@ -60,12 +55,10 @@ query Query {
 }`;
 
 export const QUERY_CATEGORY = gql`
-query Category($id: ID!) {
+query Query($id: ID!) {
   category(_id: $id) {
     _id
     userId
-    month
-    year
     name
     budget
     expenses {
@@ -75,12 +68,10 @@ query Category($id: ID!) {
 }`;
 
 export const QUERY_CATEGORIES = gql`
-query Categories {
+query Query {
   categories {
     _id
     userId
-    month
-    year
     name
     budget
     expenses {
@@ -105,7 +96,7 @@ query Query($id: ID!) {
 }`;
 
 export const QUERY_EXPENSES = gql`
-query Expense {
+query Query {
   expenses {
     _id
     userId

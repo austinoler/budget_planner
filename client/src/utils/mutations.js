@@ -33,8 +33,9 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_BUDGET = gql`
-mutation addBudget($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
+mutation Mutation($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
   addBudget(userId: $userId, month: $month, year: $year, total: $total) {
+    _id
     userId
     month
     year
@@ -44,44 +45,40 @@ mutation addBudget($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
 `;
 
 export const UPDATE_BUDGET = gql`
-mutation Mutation($userId: ID!, $month: Int!, $year: Int!, $total: Float!) {
-  updateBudget(userId: $userId, month: $month, year: $year, total: $total) {
+mutation Mutation($id: ID!, $total: Float!) {
+  updateBudget(_id: $id, total: $total) {
+    _id
     userId
     month
     year
     total
-    _id
   }
 }
 `;
 
 export const ADD_CATEGORY = gql`
-mutation Mutation($userId: ID!, $month: Int!, $year: Int!, $name: String!, $budget: Float!) {
-  addCategory(userId: $userId, month: $month, year: $year, name: $name, budget: $budget) {
+mutation Mutation($userId: ID!, $name: String!, $budget: Float!, $budgetId: ID!) {
+  addCategory(userId: $userId, name: $name, budget: $budget, budgetId: $budgetId) {
     _id
     userId
-    month
-    year
     name
     budget
   }
 }`;
 
 export const UPDATE_CATEGORY = gql`
-mutation Mutation($userId: ID!, $month: Int!, $year: Int!, $name: String!, $budget: Float!) {
-  updateCategory(userId: $userId, month: $month, year: $year, name: $name, budget: $budget) {
+mutation Mutation($id: ID!, $budget: Float!) {
+  updateCategory(_id: $id, budget: $budget) {
     _id
     userId
-    month
-    year
     name
     budget
   }
 }`;
 
 export const ADD_EXPENSE = gql`
-mutation Mutation($userId: ID!, $categoryName: String!, $day: Int!, $month: Int!, $year: Int!, $amount: Float!, $description: String!, $recurring: Boolean!) {
-  addExpense(userId: $userId, categoryName: $categoryName, day: $day, month: $month, year: $year, amount: $amount, description: $description, recurring: $recurring) {
+mutation Mutation($userId: ID!, $categoryName: String!, $day: Int!, $month: Int!, $year: Int!, $amount: Float!, $description: String!, $recurring: Boolean!, $categoryId: ID!) {
+  addExpense(userId: $userId, categoryName: $categoryName, day: $day, month: $month, year: $year, amount: $amount, description: $description, recurring: $recurring, categoryId: $categoryId) {
     _id
     userId
     categoryName
@@ -110,8 +107,8 @@ mutation Mutation($id: ID!, $amount: Float, $description: String, $recurring: Bo
 }`;
 
 export const DELETE_EXPENSE = gql`
-mutation Mutation($id: ID!) {
-  deleteExpense(_id: $id) {
+mutation Mutation($id: ID!, $categoryId: ID!) {
+  deleteExpense(_id: $id, categoryId: $categoryId) {
     _id
     userId
     categoryName

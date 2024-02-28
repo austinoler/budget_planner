@@ -23,6 +23,9 @@ const Home = () => {
       )
   }
   const { budgetId } = useParams();
+  if(budgetId){
+    
+  }
 let budget = 0;
 
 
