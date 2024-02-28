@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-query Query($id: ID!) {
+query User($id: ID!) {
   user(_id: $id) {
     _id
     firstName
@@ -9,12 +9,19 @@ query Query($id: ID!) {
     email
     budgets {
       _id
+      userId
+      month
+      year
+      total
+      categories {
+        _id
+      }
     }
   }
 }
 `;
 export const QUERY_USERS = gql`
-query Query {
+query User {
   users {
     _id
     firstName
@@ -22,12 +29,16 @@ query Query {
     email
     budgets {
       _id
+      userId
+      month
+      year
+      total
     }
   }
 }`;
 
 export const QUERY_BUDGET = gql`
-query Query($id: ID!) {
+query Budget($id: ID!) {
   budget(_id: $id) {
     _id
     userId
@@ -36,12 +47,15 @@ query Query($id: ID!) {
     total
     categories {
       _id
+      userId
+      name
+      budget
     }
   }
 }`;
 
 export const QUERY_BUDGETS = gql`
-query Query {
+query Budgets {
   budgets {
     _id
     userId
@@ -50,12 +64,15 @@ query Query {
     total
     categories {
       _id
+      userId
+      name
+      budget
     }
   }
 }`;
 
 export const QUERY_CATEGORY = gql`
-query Query($id: ID!) {
+query Category($id: ID!) {
   category(_id: $id) {
     _id
     userId
@@ -63,12 +80,20 @@ query Query($id: ID!) {
     budget
     expenses {
       _id
+      userId
+      categoryName
+      day
+      month
+      year
+      amount
+      description
+      recurring
     }
   }
 }`;
 
 export const QUERY_CATEGORIES = gql`
-query Query {
+query Categories {
   categories {
     _id
     userId
@@ -76,6 +101,14 @@ query Query {
     budget
     expenses {
       _id
+      userId
+      categoryName
+      day
+      month
+      year
+      amount
+      description
+      recurring
     }
   }
 }`;
