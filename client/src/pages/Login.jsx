@@ -65,7 +65,7 @@ function Login(props) {
           </div>
         ) : null}
         <br/><br/><br/><br/>
-        <div className="flex flex-end mt-1">
+        <div className="flex flex-end mt-1 mb-3">
           <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>

@@ -87,7 +87,7 @@ function Signup(props) {
             className="col-10"
           />
         </div>
-        <div className="flex flex-end">
+        <div className="flex flex-end mb-3">
           <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>
