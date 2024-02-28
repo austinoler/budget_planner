@@ -13,13 +13,13 @@ function BudgetTable() {
     Misc: ''
   });
 
-  // const { loading, error, data } = useQuery(QUERY_CATEGORY, {
-  //   variables: {
-  //     userId: AuthService.getUserId(),
-  //     month: new Date().getMonth() + 1,
-  //     year: new Date().getFullYear(),
-  //   }
-  // });
+  const { loading, error, data } = useQuery(QUERY_CATEGORY, {
+    variables: {
+      userId: AuthService.getUserId(),
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
+    }
+  });
   
   const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
 
