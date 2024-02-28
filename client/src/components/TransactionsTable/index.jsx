@@ -3,13 +3,13 @@ import React from 'react';
 function TransactionsTable({ expenses }) {
   // Group expenses by category
   const groupedExpenses = expenses.reduce((acc, expense) => {
-    if (!acc[expense.category]) {
-      acc[expense.category] = [];
+    if (!acc[expense.categoryName]) {
+      acc[expense.categoryName] = [];
     }
-    acc[expense.category].push(expense);
+    acc[expense.categoryName].push(expense);
     return acc;
   }, {});
-
+  console.log('expenses :' , expenses);
   return ( 
     <div className="w-50 border border-1 border-success rounded p-4 mb-4 shadow">
       <h2>Transactions</h2>

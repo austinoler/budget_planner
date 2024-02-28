@@ -15,7 +15,6 @@ function BudgetTable(props) {
     Misc: ''
   });
 
-  console.log(props.expensesByCat);
   // run get budget query for the budget id that was clicked and get the related category data
   const { loading, error, data } = useQuery(QUERY_BUDGET, {
     variables: {
