@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_CATEGORY } from '../../utils/queries';
+import { QUERY_BUDGET } from '../../utils/queries';
 import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
 import AuthService from '../../utils/auth';
+import { useParams } from 'react-router-dom';
 
-function BudgetTable() {
+
+function BudgetTable(props) {
   const [editingCategory, setEditingCategory] = useState(null);
   const [newBudgets, setNewBudgets] = useState({
     Housing: '',
@@ -13,25 +15,46 @@ function BudgetTable() {
     Misc: ''
   });
 
-  const { loading, error, data } = useQuery(QUERY_CATEGORY, {
+  console.log(props.expensesByCat);
+  // run get budget query for the budget id that was clicked and get the related category data
+  const { loading, error, data } = useQuery(QUERY_BUDGET, {
     variables: {
-      userId: AuthService.getUserId(),
-      month: new Date().getMonth() + 1,
-      year: new Date().getFullYear(),
+      id : props.id
     }
   });
-  
+
+  // extract the budget for each category and update the state variable
+  useEffect(()=>{
+    if(data){
+      console.log('budget; ' , data.budget.categories);
+      const categories = data.budget.categories;
+      var Housing = 0, Food = 0, Transportation = 0, Misc = 0;
+      categories.forEach(category=> {
+        if(category.name == 'Housing'){
+          Housing += category.budget;
+        }else if(category.name == 'Food'){
+          Food += category.budget;
+        }else if(category.name == 'Transportation'){
+          Transportation += category.budget;
+        }else if (category.name == 'Misc'){
+          Misc += category.budget;
+        }
+        setNewBudgets({Housing,Food,Transportation,Misc})
+      });
+    }
+  },[data]);
+
   const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
 
-  useEffect(() => {
-    if (data) {
-      const initialBudgets = {};
-      data.category.forEach((budget) => {
-        initialBudgets[budget.name] = budget.budget || ''; // Set to empty string if budget is not available
-      });
-      setNewBudgets(initialBudgets);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const initialBudgets = {};
+  //     data.category.forEach((budget) => {
+  //       initialBudgets[budget.name] = budget.budget || ''; // Set to empty string if budget is not available
+  //     });
+  //     setNewBudgets(initialBudgets);
+  //   }
+  // }, [data]);
 
   const handleBudgetClick = (category) => {
     setEditingCategory(category);
@@ -66,6 +89,39 @@ function BudgetTable() {
     <div className="border border-1 border-success rounded p-4 mb-4 shadow">
     <table className="table">
       {/* Table body */}
+      <thead>
+        <tr className="col">
+          <th scope="col" className="w-25">Category</th>
+          <th scope="col" className="w-25">Budget $</th>
+          <th scope="col" className="w-25">Expenses $</th>
+          <th scope="col" className="w-25">Budget Variance $</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.keys(newBudgets).map((category) => (
+          <tr key={category}>
+            <th scope="row">{category}</th>
+            <td
+              onClick={() => handleBudgetClick(category)}
+              className={editingCategory === category ? '' : 'hover-effect'}
+            >
+              {editingCategory === category ? (
+                <input
+                  type="number"
+                  value={newBudgets[category]}
+                  onChange={(e) => handleInputChange(e, category)}
+                  onBlur={() => handleBlur(category)}
+                  autoFocus
+                />
+              ) : (
+                newBudgets[category]
+              )}
+            </td>
+            <td>{props.expensesByCat[category]}</td>
+            <td>{newBudgets[category]-props.expensesByCat[category]}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
     </div>
   );

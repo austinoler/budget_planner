@@ -21,6 +21,7 @@ function BudgetTotal(props) {
   useEffect(() => {
     if (!loading) {
       setTotalBudget(data.budget.total)
+      setShowForm(false)
     }
   }, [data])
 
@@ -33,19 +34,6 @@ function BudgetTotal(props) {
     const year = date.getFullYear();
     const userId = Auth.getProfile().data._id
 
-    // try{
-    //   const { data } = await updateBudget({
-    //     variables: {
-    //       userId,
-    //       month,
-    //       year,
-    //       total: parseFloat(totalBudget)
-    //     }
-    //   })
-    // }catch (err){
-    //   console.error(err);
-
-    // }
     setShowForm(false);
   };
 
@@ -60,7 +48,7 @@ function BudgetTotal(props) {
       {showForm ? (
         <div className="form justify-content-center border border-success rounded p-4 mb-4 shadow">
           <div className="form-Group text-center">
-            <h2><label htmlFor="inputBudget">This Month's Budget:</label></h2>
+            <h2><label htmlFor="inputBudget">Budget Total:</label></h2>
             <div className="row justify-content-center">
               <span className="col-1 w-auto fs-4">$</span>
               <span className="col-2 w-25">
@@ -82,9 +70,9 @@ function BudgetTotal(props) {
           </div>
         </div>
       ) : (
-        <div className= "justify-content-center border border-success rounded p-4 mb-4 shadow">
+        <div className= "d-flex align-items-center flex-column justify-content-center border border-success rounded p-4 mb-4 shadow">
           {/* Display the message once the budget has been submitted */}
-          <p className=" text-center">You have entered a budget of ${totalBudget}</p>
+          <h2 className = "text-center">Budget Total:  <div>${totalBudget}</div></h2>
           {/* Show the edit button */}
           <i className=" bi bi-pencil-square" onClick={handleEditClick}></i>
         </div>
