@@ -3,7 +3,6 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch.jsx'
@@ -24,8 +23,8 @@ const router = createBrowserRouter([
         element: <Budget/>
       },
       {
-        path: '/home',
-        element: <Home />
+        path: '/budget',
+        element: <Budget />
       }, {
         path: '/login',
         element: <Login />

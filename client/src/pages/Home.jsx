@@ -12,8 +12,18 @@ import { ADD_BUDGET } from '../utils/mutations';
 import { useParams } from 'react-router-dom';
 
 const Home = () => {
-  const { budgetId } = useParams();
-  let budget = 0;
+  const { id } = useParams();
+  const { loading, data: budget, error } = useQuery(QUERY_BUDGET, {
+    variables: { id },
+  });
+
+  if (loading) {
+    return (<h1>Loading . . .</h1>)
+  }
+  console.log(budget);
+  if(error){
+    console.error(error);
+  }
 
   if (!Auth.loggedIn()) {
     return (
@@ -24,40 +34,36 @@ const Home = () => {
       </div>
     );
   }
-
+  
   // Check if the current loggedin user has a budget for this month. If not, create one with default amount of 500
   var userId = Auth.getProfile().data._id
   const currentDate = new Date;
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
 
-  // check if there is a budget for this month/year
-  const { loading, data } = useQuery(QUERY_BUDGET, {
-    variables: { userId, month, year },
-  });
-  const [addBudget, { data: addBudgetData, error }] = useMutation(ADD_BUDGET
-    // , {
-    //   refetchQueries: [
-    //     QUERY_BUDGET,
-    //     'getBudget'
-    //   ]}
-  );
-  
+  // const [addBudget, { data: addBudgetData, error }] = useMutation(ADD_BUDGET
+  //   // , {
+  //   //   refetchQueries: [
+  //   //     QUERY_BUDGET,
+  //   //     'getBudget'
+  //   //   ]}
+  // );
+
   // if budget exists then send the total to budgetTotal component else create one with default value of 500
-  useEffect(() => {
-    if (!data) {
-      addBudget({
-        variables: {
-          userId,
-          month,
-          year,
-          total: 500
-        }
-      });
-    } else {
-      budget = data.budget.total
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (!data) {
+  //     addBudget({
+  //       variables: {
+  //         userId,
+  //         month,
+  //         year,
+  //         total: 500
+  //       }
+  //     });
+  //   } else {
+  //     budget = data.budget.total
+  //   }
+  // }, [data]);
 
   const [expenses, setExpenses] = useState([]);
   const handleExpenseSubmit = (expense) => {
