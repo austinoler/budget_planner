@@ -30,11 +30,11 @@ function Login(props) {
   };
 
   return (
-    <div className="col-5 border border-1 border-success rounded p-4 shadow">
-      <h2 className="border border-1 border-success rounded"><i className="bi bi-person-check-fill"></i> LOGIN</h2>
+    <div className="col-4 border border-1 border-success rounded p-4 shadow">
+      <h2 className="border border-1 border-success rounded text-center"><i className="bi bi-person-check-fill"></i> LOGIN</h2>
       <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">
         <div className="my-3">
-          <label htmlFor="email" className="col-2 w-10">
+          <label htmlFor="email" className="col-1 w-10">
             <i className="bi bi-envelope-fill"></i>
           </label>
           <input
@@ -43,11 +43,11 @@ function Login(props) {
             type="email"
             id="email"
             onChange={handleChange}
-            className="col-10"
+            className="col-11"
           />
         </div>
         <div className="my-3">
-          <label htmlFor="pwd" className="col-2 w-10">
+          <label htmlFor="pwd" className="col-1 w-10">
             <i className="bi bi-lock-fill"></i>
           </label>
           <input
@@ -56,7 +56,7 @@ function Login(props) {
             type="password"
             id="pwd"
             onChange={handleChange}
-            className="col-10"
+            className="col-11"
           />
         </div>
         {error ? (
@@ -65,7 +65,7 @@ function Login(props) {
           </div>
         ) : null}
         <br/><br/><br/><br/>
-        <div className="flex flex-end mt-1 mb-3">
+        <div className="text-center mt-1 mb-3">
           <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>

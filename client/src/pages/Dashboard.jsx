@@ -8,9 +8,9 @@ import Login from './Login'
 function Dashboard() {
     if (!Auth.loggedIn()) {
         return (
-            <div className="row shadow rounded border border-3 p-4">
+            <div className="row shadow rounded border border-3 p-4 justify-content-center">
                 <Login />
-                <h2 className="col-2 align-self-center">OR</h2>
+                <h2 className="col-2 align-self-center text-center">OR</h2>
                 <Signup />
             </div>
         )

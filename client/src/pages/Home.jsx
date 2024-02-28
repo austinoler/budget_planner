@@ -29,19 +29,6 @@ const Home = () => {
     // console.log('expenses', expensesData);
 
 
-
-
-
-  if (!Auth.loggedIn()) {
-    return (
-      <div className="row shadow rounded border border-3 p-4">
-        <Login />
-        <h2 className="col-2 align-self-center">OR</h2>
-        <Signup />
-      </div>
-    );
-  }
-
   // Check if the current loggedin user has a budget for this month. If not, create one with default amount of 500
   var userId = Auth.getProfile().data._id
   const currentDate = new Date;
