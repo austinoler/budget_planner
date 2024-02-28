@@ -2,11 +2,12 @@ import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import BudgetList from '../components/BudgetList'
 import { QUERY_USER } from '../utils/queries';
+import Signup from './Signup'
 
 function Dashboard() {
-    if (!Auth.loggedIn()) {
-        return <Signup></Signup>
-    }
+    // if (!Auth.loggedIn()) {
+    //     return <Signup></Signup>
+    // }
     const user = Auth.getProfile().data.firstName;
     const id = Auth.getProfile().data._id;
     const { loading, data } = useQuery(QUERY_USER, {
