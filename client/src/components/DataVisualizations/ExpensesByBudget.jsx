@@ -71,7 +71,7 @@ const ExpensesByBudget = ({ id }) => {
   };
 
   return (
-    <div className="w-50 border border-1 border-success rounded p-4 mb-4 shadow">
+    <div className="w-50 border border-1 border-success rounded p-4 mb-4 shadow bg-light">
       {expensesByCategory && <Bar data={chartData} />}
     </div>
   );

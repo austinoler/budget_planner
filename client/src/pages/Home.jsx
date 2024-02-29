@@ -164,6 +164,7 @@ const Home = () => {
         <BudgetTable id={id} expenses={expenses} expensesByCat={expensesByCat} />
         <ExpensesForm onSubmit={handleExpenseSubmit} />
         <TransactionsTable expenses={expenses} />
+        <ExpensesByBudget id={id} />
       </div>
     </div>
   );
