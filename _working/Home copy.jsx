@@ -4,6 +4,8 @@ import BudgetTable from "../components/BudgetTable";
 import ExpensesForm from "../components/ExpensesForm";
 import TransactionsTable from "../components/TransactionsTable";
 import ExpensesByBudget from '../components/DataVisualizations/ExpensesByBudget';
+import GetExpensesByBudgetAndCategories from '../../../_working/Resolver';
+import DataVisualization from '../../../_working/VisualizationComponent';
 import Auth from '../utils/auth'
 import Signup from './Signup';
 import Login from './Login';
@@ -144,18 +146,23 @@ const Home = () => {
     setExpenses([...expenses, expense]);
   };
 
-   return (
+  const Home = 
+  const handleData = (data) => {
+    console.log('data in parent component:', data);
+  }
+
+  return (
     <div className="row shadow rounded border border-3 p-4">
       <BudgetTotal id={id} />
       <BudgetTable id={id} expenses={expenses} expensesByCat = {expensesByCat}/>
       <ExpensesForm onSubmit={handleExpenseSubmit} />
       <TransactionsTable expenses={expenses} />
-      <ExpensesByBudget id={id}/>
+      <ExpensesByBudget id={id} onDataReceived={handleData} />
+      {/* <GetExpensesByBudgetAndCategories id={id} /> */}
+      <DataVisualization data={data}/>
+
     </div>
   );
 }
-
-
-
 
 export default Home;
