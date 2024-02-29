@@ -83,10 +83,10 @@ const Home = () => {
 
   // state variable used to store the total expenses for each category
   const [expensesByCat, setExpensesByCat] = useState({
-    Housing: '',
-    Food: '',
-    Transportation: '',
-    Misc: ''
+    Housing: 0,
+    Food: 0,
+    Transportation: 0,
+    Misc: 0
   });
 
   // stores the category ID for each category in this budget
@@ -103,13 +103,30 @@ const Home = () => {
     // figure out what category the expense belongs to and get the categoryId from state
     var categoryId = '';
     if(expense.categoryName == 'Housing'){
-      categoryId = categoryIDs.housingID
+      categoryId = categoryIDs.housingID;
+      setExpensesByCat(prevState => ({
+        ...prevState,
+        ['Housing']: parseFloat(expensesByCat['Housing']) +parseFloat(expense.amount)
+      }));
     }else if(expense.categoryName == 'Food'){
-      categoryId = categoryIDs.foodID
+      categoryId = categoryIDs.foodID;
+      setExpensesByCat(prevState => ({
+        ...prevState,
+        ['Food']: parseFloat(expensesByCat['Food']) + parseFloat(expense.amount)
+      }));
+
     }else if(expense.categoryName == 'Transportation'){
-      categoryId = categoryIDs.transportationID
+      categoryId = categoryIDs.transportationID;
+      setExpensesByCat(prevState => ({
+        ...prevState,
+        ['Transportation']: parseFloat(expensesByCat['Transportation']) + parseFloat(expense.amount)
+      }));
     }else if (expense.categoryName == 'Misc'){
-      categoryId = categoryIDs.miscID
+      categoryId = categoryIDs.miscID;
+      setExpensesByCat(prevState => ({
+        ...prevState,
+        ['Misc']: parseFloat(expensesByCat['Misc']) + parseFloat(expense.amount)
+      }));
     }
 
     // add new expense to database
