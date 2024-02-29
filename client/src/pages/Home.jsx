@@ -16,15 +16,7 @@ const Home = () => {
 
   const { id } = useParams();
   //   console.log('id: ', id);
-  const [addExpense] = useMutation
-  (ADD_EXPENSE
-    // , {
-    // refetchQueries: [
-    //   QUERY_BUDGET,
-    //   'getBudget'
-    // ]
-  // }
-  );
+  const [addExpense] = useMutation(ADD_EXPENSE);
 
 
   const { loading, data } = useQuery(QUERY_BUDGET, {
@@ -55,6 +47,7 @@ const Home = () => {
       var housingID, foodID, transportationID, miscID;
       const categoriesData = data.budget.categories
 
+      // extract the id for each category and save to state variable
       categoriesData.forEach(category => {
         if(category.name == 'Housing'){
           housingID = category._id
@@ -67,6 +60,8 @@ const Home = () => {
         }
         setcategoryIDs({housingID, foodID, transportationID, miscID})
       })
+
+      // get expense amount totals for each category and save to state
       const expensesData = getExpenses(categoriesData)
       setExpenses([...expenses, ...expensesData]);
       console.log('expenses data:', expensesData);
@@ -94,6 +89,7 @@ const Home = () => {
     Misc: ''
   });
 
+  // stores the category ID for each category in this budget
   const [categoryIDs, setcategoryIDs] = useState({
     housingID: '',
     foodID: '',
@@ -102,7 +98,9 @@ const Home = () => {
   });
 
   const [expenses, setExpenses] = useState([]);
+
   const handleExpenseSubmit = async (expense) => {
+    // figure out what category the expense belongs to and get the categoryId from state
     var categoryId = '';
     if(expense.categoryName == 'Housing'){
       categoryId = categoryIDs.housingID
@@ -113,6 +111,8 @@ const Home = () => {
     }else if (expense.categoryName == 'Misc'){
       categoryId = categoryIDs.miscID
     }
+
+    // add new expense to database
     const {data} = await addExpense({
       variables: {
         userId,
@@ -122,6 +122,7 @@ const Home = () => {
           categoryId
       }
     });
+
     setExpenses([...expenses, expense]);
   };
 
