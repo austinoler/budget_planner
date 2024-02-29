@@ -48,7 +48,7 @@ function BudgetTotal(props) {
     <>
       {/* Conditional rendering to show/hide the form */}
       {showForm ? (
-        <div className="form justify-content-center border border-success rounded p-4 mb-4 shadow">
+        <div className="col-12 form justify-content-center border border-success rounded p-4 mb-4 shadow">
           <div className="form-Group text-center">
             <h2><label htmlFor="inputBudget">Budget Total:</label></h2>
             <div className="row justify-content-center">

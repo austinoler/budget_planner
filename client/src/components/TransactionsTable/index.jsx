@@ -11,7 +11,7 @@ function TransactionsTable({ expenses }) {
   }, {});
   console.log('expenses :' , expenses);
   return ( 
-    <div className="w-50 border border-1 border-success rounded p-4 mb-4 shadow">
+    <div className="col-6 border border-1 border-success rounded p-4 mb-4 shadow">
       <h2>Transactions</h2>
       <div id="accordion">
         {Object.entries(groupedExpenses).map(([category, categoryExpenses], index) => (

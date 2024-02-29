@@ -85,7 +85,7 @@ function BudgetTable(props) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
+    <div className="col-12 border border-1 border-success rounded p-4 mb-4 shadow">
     <table className="table">
       {/* Table body */}
       <thead>

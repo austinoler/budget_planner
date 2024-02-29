@@ -11,7 +11,7 @@ function Dashboard() {
         return (
             <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow"
             style={{
-              backgroundImage: "url(/assets/images/home-bg.jpg)",
+              backgroundImage: "url(/assets/images/login-bg.jpg)",
               height: "100vh",
               width: "100vw",
               bakgroundSize: 'cover',

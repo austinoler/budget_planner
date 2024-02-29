@@ -22,7 +22,7 @@ function ExpensesForm({ onSubmit }) {
   };
 
   return (
-    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
+    <div className="col-12 border border-1 border-success rounded p-4 mb-4 shadow">
       <h2>Add an Expense</h2>
       <div className="input-group">
         <select
