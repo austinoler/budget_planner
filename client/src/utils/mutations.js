@@ -77,7 +77,7 @@ mutation Mutation($id: ID!, $budget: Float!) {
 }`;
 
 export const ADD_EXPENSE = gql`
-mutation Mutation($userId: ID!, $categoryName: String!, $day: Int!, $month: Int!, $year: Int!, $amount: Float!, $description: String!, $recurring: Boolean!, $categoryId: ID!) {
+mutation Mutation($userId: ID!, $categoryName: String!, $day: Int!, $month: Int!, $year: Int!, $amount: Float!, $description: String!, $recurring: Boolean, $categoryId: ID!) {
   addExpense(userId: $userId, categoryName: $categoryName, day: $day, month: $month, year: $year, amount: $amount, description: $description, recurring: $recurring, categoryId: $categoryId) {
     _id
     userId

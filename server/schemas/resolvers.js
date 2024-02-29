@@ -78,8 +78,8 @@ const resolvers = {
     updateCategory: async (parent, { _id, budget }) => {
       await Category.findOneAndUpdate({ _id: _id }, { budget });
     },
-    addExpense: async (parent, { userId, categoryName, day, month, year, amount, description, recurring, categoryId }) => {
-      const expense = await Expense.create({ userId, categoryName, day, month, year, amount, description, recurring });
+    addExpense: async (parent, { userId, categoryName, day, month, year, amount, description, categoryId }) => {
+      const expense = await Expense.create({ userId, categoryName, day, month, year, amount, description });
       const update = await Category.findOneAndUpdate({ _id: categoryId }, { $addToSet: { expenses: expense._id } }, { new: true });
       return expense;
     },
