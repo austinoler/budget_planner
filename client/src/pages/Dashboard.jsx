@@ -4,6 +4,7 @@ import BudgetList from '../components/BudgetList'
 import { QUERY_USER } from '../utils/queries';
 import Signup from './Signup'
 import Login from './Login'
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     if (!Auth.loggedIn()) {
@@ -15,8 +16,12 @@ function Dashboard() {
             </div>
         )
     }
+
+    // get user data from token
     const user = Auth.getProfile().data.firstName;
     const id = Auth.getProfile().data._id;
+
+    // query user data
     const { loading, data } = useQuery(QUERY_USER, {
         variables: { id }
     });
@@ -24,15 +29,13 @@ function Dashboard() {
     if (loading) {
         return (<h1>Loading. . .</h1>)
     }
-    if (data) {
-        console.log(data.user.budgets);
-    }
-
+    
     return (
         <div className="d-flex flex-column align-items-center">
             <div>Hello {user}</div>
             <div>My Budgets</div>
             <BudgetList budgets={data.user.budgets}></BudgetList>
+            <Link className = 'btn btn-success rounded'to={`/budget`}>Create new budget</Link>
         </div>
     )
 
