@@ -7,7 +7,7 @@ const BudgetList = (props) => {
     return (
         <div className= "text-center border border-dark rounded p-2">
             {budgets ?
-                budgets.map((budget, index) => ( <div key={index}><Link to={`/home/${budget._id}`}>Created on: {budget.month + '/' + budget.year} Budget Total: {budget.total}</Link></div>)) : <div>No Budgets</div>  
+                budgets.map((budget, index) => ( <div key={index}><Link to={`/home/${budget._id}`}>Created on: {budget.month + '/' + budget.year} Budget Total: ${budget.total}</Link></div>)) : <div>No Budgets</div>  
             }
         </div>
 
