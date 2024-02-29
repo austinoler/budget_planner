@@ -85,15 +85,15 @@ function BudgetTable(props) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="col-12 border border-1 border-success rounded p-4 mb-4 shadow">
-    <table className="table">
+    <div className="col-12 bg-light border border-1 border-success rounded p-4 mb-4 shadow">
+    <table className="table border border-1 border-success rounded mb-0">
       {/* Table body */}
       <thead>
         <tr className="col">
-          <th scope="col" className="w-25">Category</th>
-          <th scope="col" className="w-25">Budget $</th>
-          <th scope="col" className="w-25">Expenses $</th>
-          <th scope="col" className="w-25">Budget Variance $</th>
+          <th scope="col" className="w-25"><h4>Category</h4></th>
+          <th scope="col" className="w-25"><h4>Budget $</h4></th>
+          <th scope="col" className="w-25"><h4>Expenses $</h4></th>
+          <th scope="col" className="w-25"><h4>Budget Variance $</h4></th>
         </tr>
       </thead>
       <tbody>

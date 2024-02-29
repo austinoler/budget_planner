@@ -133,6 +133,10 @@ input:focus {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
 }
 
+th h4 {
+  color: navy;
+}
+
 .container {
   width: 50%;
   max-width: 1200px;
