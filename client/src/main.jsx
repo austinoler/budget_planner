@@ -20,8 +20,8 @@ const router = createBrowserRouter([
         element: <Dashboard />
       },
       {
-        path: '/home',
-        element: <Home />
+        path: '/budget',
+        element: <Budget />
       },
       {
         path: '/home/:id',

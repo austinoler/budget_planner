@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import Auth from '../../utils/auth';
-import { useMutation } from '@apollo/client';
-import { ADD_EXPENSE } from '../../utils/mutations';
-const userId = Auth.getProfile().data._id
 
 function ExpensesForm({ onSubmit }) {
   const [category, setCategory] = useState('');
