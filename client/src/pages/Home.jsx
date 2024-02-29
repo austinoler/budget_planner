@@ -156,9 +156,9 @@ const Home = () => {
         width: "100vw",
         bakgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        webkitBackgroundSize: 'cover',
-        mozBackgroundSize: 'cover',
-        oBackgroundSize: 'cover',
+        WebkitBackgroundSize: 'cover',
+        MozBackgroundSize: 'cover',
+        OBackgroundSize: 'cover',
 
       }}>
 

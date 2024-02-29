@@ -82,9 +82,9 @@ function BudgetTotal(props) {
           width: "auto",
           bakgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          webkitBackgroundSize: 'cover',
-          mozBackgroundSize: 'cover',
-          oBackgroundSize: 'cover',
+          WebkitBackgroundSize: 'cover',
+          MozBackgroundSize: 'cover',
+          OBackgroundSize: 'cover',
 
         }}>
         <div className= "d-flex align-items-center flex-column justify-content-center rounded p-4 mb-4">
