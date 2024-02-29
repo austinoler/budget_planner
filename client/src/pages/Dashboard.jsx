@@ -5,7 +5,6 @@ import { QUERY_USER } from '../utils/queries';
 import Signup from './Signup'
 import Login from './Login'
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 function Dashboard() {
     if (!Auth.loggedIn()) {

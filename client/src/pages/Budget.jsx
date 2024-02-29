@@ -6,14 +6,7 @@ import Login from './Login';
 import { useMutation,  } from '@apollo/client';
 import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
-import React, { useState, useEffect } from 'react';
-import { useNavigate  } from 'react-router-dom';
-import Auth from '../utils/auth'
-import Signup from './Signup';
-import Login from './Login';
-import { useMutation,  } from '@apollo/client';
-import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
-import { QUERY_USER } from '../utils/queries';
+
 
 const Budget = () => {
     const [addBudget] = useMutation(ADD_BUDGET);
@@ -46,7 +39,6 @@ const Budget = () => {
     const [foodBudget, setFoodBudget] = useState('');
     const [transportationBudget, setTransportationBudget] = useState('');
     const [miscBudget, setMiscBudget] = useState('');
-    // const [error, setError] = useState('');
 
 
     const handleSubmit = async (event) => {
@@ -57,12 +49,6 @@ const Budget = () => {
         const food = parseFloat(foodBudget);
         const transportation = parseFloat(transportationBudget);
         const misc = parseFloat(miscBudget);
-
-        // const sumOfBudgets = housing + food + transportation + misc;
-        // if (total !== sumOfBudgets) {
-        //     setError('Budgets must add up to the total budget amount.');
-        //     return;
-        // };
 
         const budget = await addBudget({
             variables: { userId, month, year, total: parseFloat(totalBudget) },
@@ -108,7 +94,6 @@ const Budget = () => {
                     <h2 className="text-center border border-1 border-success rounded text-center">Create New Budget</h2>
                     <form onSubmit={handleSubmit} className= "border border-dark border-1 p-4 rounded">
                         <div className="mb-3">
-                            {/* {error && <div className="alert alert-danger">{error}</div>} */}
                             <label htmlFor="totalBudget" className="form-label">Total Budget Amount</label>
                             <input
                                 type="text"
