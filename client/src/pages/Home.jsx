@@ -144,13 +144,27 @@ const Home = () => {
     setExpenses([...expenses, expense]);
   };
 
-   return (
-    <div className="row shadow rounded border border-3 p-4">
-      <BudgetTotal id={id} />
-      <BudgetTable id={id} expenses={expenses} expensesByCat = {expensesByCat}/>
-      <ExpensesForm onSubmit={handleExpenseSubmit} />
-      <TransactionsTable expenses={expenses} />
-      <ExpensesByBudget id={id}/>
+  return (
+
+    <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow h-100 row"
+      style={{
+        backgroundImage: "url(/assets/images/home-bg.jpg)",
+        height: "100vh",
+        width: "100vw",
+        bakgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        WebkitBackgroundSize: 'cover',
+        MozBackgroundSize: 'cover',
+        OBackgroundSize: 'cover',
+
+      }}>
+
+      <div className="row p-4">
+        <BudgetTotal id={id} />
+        <BudgetTable id={id} expenses={expenses} expensesByCat={expensesByCat} />
+        <ExpensesForm onSubmit={handleExpenseSubmit} />
+        <TransactionsTable expenses={expenses} />
+      </div>
     </div>
   );
 }

@@ -48,12 +48,13 @@ function BudgetTotal(props) {
     <>
       {/* Conditional rendering to show/hide the form */}
       {showForm ? (
-        <div className="form justify-content-center border border-success rounded p-4 mb-4 shadow">
+    
+        <div className="d-flex align-items-center justify-content-center rounded p-4 mb-4 bg-light">
           <div className="form-Group text-center">
             <h2><label htmlFor="inputBudget">Budget Total:</label></h2>
             <div className="row justify-content-center">
               <span className="col-1 w-auto fs-4">$</span>
-              <span className="col-2 w-25">
+              <span className="col-4 w-50">
                 <input
                   type="number"
                   min="0"
@@ -66,19 +67,34 @@ function BudgetTotal(props) {
               </span>
               <span className="col-1 w-auto">
                 <button className="btn btn-primary" onClick={handleSubmit}>OK</button>
-                <i className="bi bi-pencil-square" onClick={handleEditClick}></i>
               </span>
             </div>
           </div>
         </div>
       ) : (
-        <div className= "d-flex align-items-center flex-column justify-content-center border border-success rounded p-4 mb-4 shadow">
+
+      
+        <div className="bg-image opacity-75 shadow col"
+        style={{
+          backgroundImage: "url(/assets/images/budget-total-bg.jpg)",
+          height: "auto",
+          width: "auto",
+          bakgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          WebkitBackgroundSize: 'cover',
+          MozBackgroundSize: 'cover',
+          OBackgroundSize: 'cover',
+
+        }}>
+        <div className= "d-flex align-items-center flex-column justify-content-center rounded p-4 mb-4">
           {/* Display the message once the budget has been submitted */}
-          <h2 className = "text-center">Budget Total:  <div>${totalBudget}</div></h2>
+          <h1 className = "text-center justify-content-center bg-light w-50 rounded">Budget Total:  <div className="text-danger">${totalBudget}</div> <i className=" bi bi-pencil-square" onClick={handleEditClick}> edit</i></h1>
           {/* Show the edit button */}
-          <i className=" bi bi-pencil-square" onClick={handleEditClick}></i>
+  
+        </div>
         </div>
       )}
+
     </>
   );
 }
