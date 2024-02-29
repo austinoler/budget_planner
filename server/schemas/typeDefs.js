@@ -34,7 +34,7 @@ const typeDefs = `
     year: Int!
     amount: Float!
     description: String!
-    recurring: Boolean!
+    recurring: Boolean
   }
  
   type Auth {
@@ -61,7 +61,7 @@ const typeDefs = `
     updateBudget(_id: ID!, total: Float!): Budget
     addCategory(userId: ID!, name: String!, budget: Float!, budgetId: ID!): Category
     updateCategory(_id:ID!, budget: Float!): Category
-    addExpense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, description: String!, recurring: Boolean!, categoryId: ID!): Expense
+    addExpense(userId: ID!, categoryName: String!, day: Int!, month: Int!, year: Int!, amount: Float!, description: String!, recurring: Boolean, categoryId: ID!): Expense
     updateExpense(_id: ID!, amount: Float, description: String, recurring: Boolean): Expense
     deleteExpense(_id:ID!, categoryId: ID!): Expense
   }

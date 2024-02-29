@@ -14,10 +14,12 @@ function BudgetTotal(props) {
     setTotalBudget(parseFloat(event.target.value).toFixed(2));
 
   };
+  // Get budget data from selected budget
   const { loading, data } = useQuery(QUERY_BUDGET, {
     variables: { id: props.id },
   });
-  console.log(data);
+
+  // Set budget total and hide form
   useEffect(() => {
     if (!loading) {
       setTotalBudget(data.budget.total)
