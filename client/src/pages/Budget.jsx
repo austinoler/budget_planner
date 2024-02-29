@@ -7,9 +7,6 @@ import { useMutation,  } from '@apollo/client';
 import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 
-
-
-
 const Budget = () => {
     const [addBudget] = useMutation(ADD_BUDGET);
     const [addCategory] = useMutation(ADD_CATEGORY,
