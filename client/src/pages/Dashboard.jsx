@@ -8,11 +8,24 @@ import Login from './Login'
 function Dashboard() {
     if (!Auth.loggedIn()) {
         return (
-            <div className="row shadow rounded border border-3 p-4 justify-content-center">
+            <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow"
+            style={{
+              backgroundImage: "url(/assets/images/home-bg.jpg)",
+              height: "100vh",
+              width: "100vw",
+              bakgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              webkitBackgroundSize: 'cover',
+              mozBackgroundSize: 'cover',
+              oBackgroundSize: 'cover',
+
+            }}>
+            <div className= "row w-100 justify-content-center mt-4">
                 <Login />
-                <h2 className="col-2 align-self-center text-center">OR</h2>
-                <Signup />
-            </div>
+                <h2 className="col-2 align-self-center text-center text-light">OR</h2>
+                <Signup /> 
+            </div>             
+        </div>
         )
     }
     const user = Auth.getProfile().data.firstName;
