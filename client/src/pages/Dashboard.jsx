@@ -44,11 +44,6 @@ function Dashboard() {
     }
     
     return (
-        <div className="d-flex flex-column align-items-center">
-            <div>Hello {user}</div>
-            <div>My Budgets</div>
-            <BudgetList budgets={data.user.budgets}></BudgetList>
-            <Link className = 'btn btn-success rounded'to={`/budget`}>Create new budget</Link>
         <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow"
         style={{
           backgroundImage: "url(/assets/images/dashboard-bg.jpg)",
@@ -67,10 +62,12 @@ function Dashboard() {
                 <div className= "col-2"></div>
                 <div className="col-5 border border-1 border-success rounded p-4 shadow bg-light">
                 <h2 className="border border-1 border-success rounded text-center"><i className="bi bi-cash"></i> MY BUDGETS</h2>
-                <BudgetList budgets={data.user.budgets}></BudgetList>
+                <div className="border border-dark rounded text-center">   
+                    <BudgetList budgets={data.user.budgets}></BudgetList>
+                    <Link className = 'btn btn-success bg-success rounded mb-2'to={`/budget`}>Create New Budget</Link>
+                </div>
                 </div>     
             </div>
-
         </div>
     )
 
