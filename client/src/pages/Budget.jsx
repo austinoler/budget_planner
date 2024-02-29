@@ -6,6 +6,14 @@ import Login from './Login';
 import { useMutation,  } from '@apollo/client';
 import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
+import React, { useState, useEffect } from 'react';
+import { useNavigate  } from 'react-router-dom';
+import Auth from '../utils/auth'
+import Signup from './Signup';
+import Login from './Login';
+import { useMutation,  } from '@apollo/client';
+import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
+import { QUERY_USER } from '../utils/queries';
 
 const Budget = () => {
     const [addBudget] = useMutation(ADD_BUDGET);
@@ -81,11 +89,24 @@ const Budget = () => {
     }
 
     return (
-        <div className="container mt-5">
+        <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow h-100"
+            style={{
+              backgroundImage: "url(/assets/images/budget-bg.jpg)",
+              height: "100vh",
+              width: "100vw",
+              bakgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              webkitBackgroundSize: 'cover',
+              mozBackgroundSize: 'cover',
+              oBackgroundSize: 'cover',
+
+            }}>
+
+        <div className="container mt-5 border border-1 border-success rounded p-4 shadow bg-light">
             <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <h2 className="text-center mb-4">Create New Budget</h2>
-                    <form onSubmit={handleSubmit}>
+                <div className="col-md-6 w-100">
+                    <h2 className="text-center border border-1 border-success rounded text-center">Create New Budget</h2>
+                    <form onSubmit={handleSubmit} className= "border border-dark border-1 p-4 rounded">
                         <div className="mb-3">
                             {/* {error && <div className="alert alert-danger">{error}</div>} */}
                             <label htmlFor="totalBudget" className="form-label">Total Budget Amount</label>
@@ -152,11 +173,12 @@ const Budget = () => {
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="button btn bg-success text-white">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
+       </div> 
     );
 }
 

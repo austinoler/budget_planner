@@ -42,6 +42,7 @@ h6 {
 
 h1 {
   font-size: 2.25rem;
+  color: navy;
 }
 
 h2 {
@@ -76,8 +77,8 @@ a {
   font-weight: bold;
 }
 
-a:hover {
-  text-decoration: underline;
+a:active {
+  opacity: 75%;
 }
 
 header {
@@ -98,7 +99,7 @@ button {
   padding: 0.25rem 1rem;
   border-radius: .5rem;
   border: none;
-  outline: none;
+  outline: green;
   cursor: pointer;
   margin: 0 1px;
   color: white;
@@ -132,8 +133,12 @@ input:focus {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
 }
 
+th h4 {
+  color: navy;
+}
+
 .container {
-  width: 85%;
+  width: 50%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;

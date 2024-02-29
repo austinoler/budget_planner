@@ -5,7 +5,10 @@ import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGO
 import AuthService from '../../utils/auth';
 import { useParams } from 'react-router-dom';
 
+import { useParams } from 'react-router-dom';
 
+
+function BudgetTable(props) {
 function BudgetTable(props) {
   const [editingCategory, setEditingCategory] = useState(null);
   const [newBudgets, setNewBudgets] = useState({
@@ -14,6 +17,34 @@ function BudgetTable(props) {
     Transportation: '',
     Misc: ''
   });
+
+  // run get budget query for the budget id that was clicked and get the related category data
+  const { loading, error, data } = useQuery(QUERY_BUDGET, {
+    variables: {
+      id : props.id
+    }
+  });
+
+  // extract the budget for each category and update the state variable
+  useEffect(()=>{
+    if(data){
+      console.log('budget; ' , data.budget.categories);
+      const categories = data.budget.categories;
+      var Housing = 0, Food = 0, Transportation = 0, Misc = 0;
+      categories.forEach(category=> {
+        if(category.name == 'Housing'){
+          Housing += category.budget;
+        }else if(category.name == 'Food'){
+          Food += category.budget;
+        }else if(category.name == 'Transportation'){
+          Transportation += category.budget;
+        }else if (category.name == 'Misc'){
+          Misc += category.budget;
+        }
+        setNewBudgets({Housing,Food,Transportation,Misc})
+      });
+    }
+  },[data]);
 
   // run get budget query for the budget id that was clicked and get the related category data
   const { loading, error, data } = useQuery(QUERY_BUDGET, {
@@ -54,6 +85,15 @@ function BudgetTable(props) {
   //     setNewBudgets(initialBudgets);
   //   }
   // }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const initialBudgets = {};
+  //     data.category.forEach((budget) => {
+  //       initialBudgets[budget.name] = budget.budget || ''; // Set to empty string if budget is not available
+  //     });
+  //     setNewBudgets(initialBudgets);
+  //   }
+  // }, [data]);
 
   const handleBudgetClick = (category) => {
     setEditingCategory(category);
@@ -85,15 +125,15 @@ function BudgetTable(props) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
-    <table className="table">
+    <div className="col-12 bg-light border border-1 border-success rounded p-4 mb-4 shadow">
+    <table className="table border border-1 border-success rounded mb-0">
       {/* Table body */}
       <thead>
         <tr className="col">
-          <th scope="col" className="w-25">Category</th>
-          <th scope="col" className="w-25">Budget $</th>
-          <th scope="col" className="w-25">Expenses $</th>
-          <th scope="col" className="w-25">Budget Variance $</th>
+          <th scope="col" className="w-25"><h4>Category</h4></th>
+          <th scope="col" className="w-25"><h4>Budget $</h4></th>
+          <th scope="col" className="w-25"><h4>Expenses $</h4></th>
+          <th scope="col" className="w-25"><h4>Budget Variance $</h4></th>
         </tr>
       </thead>
       <tbody>

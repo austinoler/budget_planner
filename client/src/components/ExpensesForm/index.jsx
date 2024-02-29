@@ -22,9 +22,9 @@ function ExpensesForm({ onSubmit }) {
   };
 
   return (
-    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
-      <h2>Add an Expense</h2>
-      <div className="input-group">
+    <div className="col-12 border border-1 border-success rounded p-4 mb-4 shadow bg-light">
+      <h2 className="border border-1 border-success rounded p-2"><i class="bi bi-plus"></i> Add an Expense</h2>
+      <div className="input-group border border-1 border-dark rounded">
         <select
           className="custom-select"
           value={category}

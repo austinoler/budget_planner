@@ -11,15 +11,15 @@ function TransactionsTable({ expenses }) {
   }, {});
   console.log('expenses :' , expenses);
   return ( 
-    <div className="w-50 border border-1 border-success rounded p-4 mb-4 shadow">
-      <h2>Transactions</h2>
-      <div id="accordion">
+    <div className="col-6 border border-1 border-success rounded p-4 mb-4 shadow bg-light">
+      <h2 className="border border-1 border-success rounded p-2"><i class="bi bi-calculator"></i> Transactions</h2>
+      <div id="accordion" className= "border border-1 border-dark rounded">
         {Object.entries(groupedExpenses).map(([category, categoryExpenses], index) => (
-          <div key={index} className="card w-100">
+          <div key={index} className="card w-100 mt-2">
             <div className="card-header" id={`heading${index}`}>
               <h5 className="mb-0">
                 <button className="btn btn-link" data-toggle="collapse" data-target={`#collapse${index}`} aria-expanded="true" aria-controls={`collapse${index}`}>
-                  {category}
+                  <h3>{category}</h3>
                 </button>
               </h5>
             </div>
@@ -27,7 +27,7 @@ function TransactionsTable({ expenses }) {
               <div className="card-body text-start">
                 {categoryExpenses.map((expense, index) => (
                   <div key={index}>
-                    - {expense.description ? `${expense.description}: ` : ''} ${expense.amount}<br />
+                      <h4><i class="bi bi-receipt"></i> {expense.description ? `${expense.description}: ` : ''} ${expense.amount}</h4><br />
                   </div>
                 ))}
               </div>
