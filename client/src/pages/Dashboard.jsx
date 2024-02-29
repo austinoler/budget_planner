@@ -16,9 +16,9 @@ function Dashboard() {
               width: "100vw",
               bakgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
-              webkitBackgroundSize: 'cover',
-              mozBackgroundSize: 'cover',
-              oBackgroundSize: 'cover',
+              WebkitBackgroundSize: 'cover',
+              MozBackgroundSize: 'cover',
+              OBackgroundSize: 'cover',
 
             }}>
             <div className= "row w-100 justify-content-center mt-4">
