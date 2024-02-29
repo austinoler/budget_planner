@@ -6,6 +6,14 @@ import Login from './Login';
 import { useMutation,  } from '@apollo/client';
 import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
+import React, { useState, useEffect } from 'react';
+import { useNavigate  } from 'react-router-dom';
+import Auth from '../utils/auth'
+import Signup from './Signup';
+import Login from './Login';
+import { useMutation,  } from '@apollo/client';
+import { ADD_BUDGET, ADD_CATEGORY } from '../utils/mutations';
+import { QUERY_USER } from '../utils/queries';
 
 const Budget = () => {
     const [addBudget] = useMutation(ADD_BUDGET);

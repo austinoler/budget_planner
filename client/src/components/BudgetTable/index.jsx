@@ -5,7 +5,10 @@ import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGO
 import AuthService from '../../utils/auth';
 import { useParams } from 'react-router-dom';
 
+import { useParams } from 'react-router-dom';
 
+
+function BudgetTable(props) {
 function BudgetTable(props) {
   const [editingCategory, setEditingCategory] = useState(null);
   const [newBudgets, setNewBudgets] = useState({
@@ -43,8 +46,45 @@ function BudgetTable(props) {
     }
   },[data]);
 
+  // run get budget query for the budget id that was clicked and get the related category data
+  const { loading, error, data } = useQuery(QUERY_BUDGET, {
+    variables: {
+      id : props.id
+    }
+  });
+
+  // extract the budget for each category and update the state variable
+  useEffect(()=>{
+    if(data){
+      console.log('budget; ' , data.budget.categories);
+      const categories = data.budget.categories;
+      var Housing = 0, Food = 0, Transportation = 0, Misc = 0;
+      categories.forEach(category=> {
+        if(category.name == 'Housing'){
+          Housing += category.budget;
+        }else if(category.name == 'Food'){
+          Food += category.budget;
+        }else if(category.name == 'Transportation'){
+          Transportation += category.budget;
+        }else if (category.name == 'Misc'){
+          Misc += category.budget;
+        }
+        setNewBudgets({Housing,Food,Transportation,Misc})
+      });
+    }
+  },[data]);
+
   const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
 
+  // useEffect(() => {
+  //   if (data) {
+  //     const initialBudgets = {};
+  //     data.category.forEach((budget) => {
+  //       initialBudgets[budget.name] = budget.budget || ''; // Set to empty string if budget is not available
+  //     });
+  //     setNewBudgets(initialBudgets);
+  //   }
+  // }, [data]);
   // useEffect(() => {
   //   if (data) {
   //     const initialBudgets = {};

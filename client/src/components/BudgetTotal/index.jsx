@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_BUDGET, UPDATE_BUDGET } from '../../utils/mutations';
+import { QUERY_BUDGET } from '../../utils/queries';
+
 import { QUERY_BUDGET } from '../../utils/queries';
 
 import Auth from '../../utils/auth'
@@ -8,12 +12,29 @@ function BudgetTotal(props) {
   const [totalBudget, setTotalBudget] = useState(null);
   const [showForm, setShowForm] = useState(true);
   const [updateBudget, { error }] = useMutation(UPDATE_BUDGET);
+  const [updateBudget, { error }] = useMutation(UPDATE_BUDGET);
 
   const handleInputChange = (event) => {
     // Set the total budget
     setTotalBudget(parseFloat(event.target.value).toFixed(2));
 
+
   };
+  // Get budget data from selected budget
+  const { loading, data } = useQuery(QUERY_BUDGET, {
+    variables: { id: props.id },
+  });
+
+  // Set budget total and hide form
+  useEffect(() => {
+    if (!loading) {
+      setTotalBudget(data.budget.total)
+      setShowForm(false)
+    }
+  }, [data])
+
+  console.log('prop: ' + props.id + ' budget: ', totalBudget);
+
   // Get budget data from selected budget
   const { loading, data } = useQuery(QUERY_BUDGET, {
     variables: { id: props.id },
@@ -32,6 +53,7 @@ function BudgetTotal(props) {
   const handleSubmit = async (event) => {
     // Hide the form when the user submits
     const date = new Date();
+    const month = date.getMonth() + 1;
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const userId = Auth.getProfile().data._id
@@ -52,6 +74,7 @@ function BudgetTotal(props) {
         <div className="d-flex align-items-center justify-content-center rounded p-4 mb-4 bg-light">
           <div className="form-Group text-center">
             <h2><label htmlFor="inputBudget">Budget Total:</label></h2>
+            <h2><label htmlFor="inputBudget">Budget Total:</label></h2>
             <div className="row justify-content-center">
               <span className="col-1 w-auto fs-4">$</span>
               <span className="col-4 w-50">
@@ -62,6 +85,7 @@ function BudgetTotal(props) {
                   onChange={handleInputChange}
                   className="form-control"
                   id="inputBudget"
+                  placeholder={totalBudget ? totalBudget : 'Enter Budget'}
                   placeholder={totalBudget ? totalBudget : 'Enter Budget'}
                 />
               </span>

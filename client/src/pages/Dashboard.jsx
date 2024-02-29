@@ -5,6 +5,7 @@ import { QUERY_USER } from '../utils/queries';
 import Signup from './Signup'
 import Login from './Login'
 import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     if (!Auth.loggedIn()) {
@@ -31,8 +32,12 @@ function Dashboard() {
     }
 
     // get user data from token
+
+    // get user data from token
     const user = Auth.getProfile().data.firstName;
     const id = Auth.getProfile().data._id;
+
+    // query user data
 
     // query user data
     const { loading, data } = useQuery(QUERY_USER, {
@@ -42,6 +47,7 @@ function Dashboard() {
     if (loading) {
         return (<h1>Loading. . .</h1>)
     }
+    
     
     return (
         <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow"
