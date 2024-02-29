@@ -71,25 +71,12 @@ const resolvers = {
       await Budget.findOneAndUpdate({ _id: _id }, { total });
     },
     addCategory: async (parent, { userId, name, budget, budgetId }) => {
-      const category = await Category.create({ userId, name, budget, budgetId });
+      const category = await Category.create({ userId, name, budget });
       const update = await Budget.findOneAndUpdate({ _id: budgetId }, { $addToSet: { categories: category._id } }, { new: true });
       return category;
     },
     updateCategory: async (parent, { _id, budget }) => {
-      const updatedCategory = await Category.findByIdAndUpdate(
-        _id,
-        { budget },
-        { new: true }
-      );
-
-      if (updatedCategory) {
-        const budgetId = updatedCategory.budgetId;
-        await Budget.findByIdAndUpdate(
-          budgetId,
-          { $inc: { total: budget - updatedCategory.budget } },
-          { new: true }
-        );
-      }
+      await Category.findOneAndUpdate({ _id: _id }, { budget });
 
       return updatedCategory;
     },
