@@ -64,7 +64,7 @@ function Dashboard() {
                 <h2 className="border border-1 border-success rounded text-center"><i className="bi bi-cash"></i> MY BUDGETS</h2>
                 <div className="border border-dark rounded text-center">   
                     <BudgetList budgets={data.user.budgets}></BudgetList>
-                    <Link className = 'btn btn-success bg-success rounded mb-2'to={`/budget`}>Create New Budget</Link>
+                    <Link className = 'button btn text-white bg-success rounded mb-2'to={`/budget`}>Create New Budget</Link>
                 </div>
                 </div>     
             </div>

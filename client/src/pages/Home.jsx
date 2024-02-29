@@ -144,11 +144,28 @@ const Home = () => {
   };
 
   return (
+    
+    <div className="bg-image justify-content-center opacity-75 p-4 border border-1 border-success rounded p-4 shadow h-100"
+            style={{
+              backgroundImage: "url(/assets/images/budget-bg.jpg)",
+              height: "100vh",
+              width: "100vw",
+              bakgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              webkitBackgroundSize: 'cover',
+              mozBackgroundSize: 'cover',
+              oBackgroundSize: 'cover',
+
+            }}>
+
+
+
     <div className="row shadow rounded border border-3 p-4">
       <BudgetTotal id={id} />
       <BudgetTable id={id} expenses={expenses} expensesByCat = {expensesByCat}/>
       <ExpensesForm onSubmit={handleExpenseSubmit} />
       <TransactionsTable expenses={expenses} />
+    </div>
     </div>
   );
 }
