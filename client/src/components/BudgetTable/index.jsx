@@ -72,41 +72,6 @@ function BudgetTable(props) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-
-    <div className="border border-1 border-success rounded p-4 mb-4 shadow">
-    <table className="table">
-      {/* Table body */}
-      <thead>
-        <tr className="col">
-          <th scope="col" className="w-25">Category</th>
-          <th scope="col" className="w-25">Budget $</th>
-          <th scope="col" className="w-25">Expenses $</th>
-          <th scope="col" className="w-25">Budget Variance $</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(newBudgets).map((category) => (
-          <tr key={category}>
-            <th scope="row">{category}</th>
-            <td
-              onClick={() => handleBudgetClick(category)}
-              className={editingCategory === category ? '' : 'hover-effect'}
-            >
-              {editingCategory === category ? (
-                <input
-                  type="number"
-                  value={newBudgets[category]}
-                  onChange={(e) => handleInputChange(e, category)}
-                  onBlur={() => handleBlur(category)}
-                  autoFocus
-                />
-              ) : (
-                newBudgets[category]
-              )}
-            </td>
-            <td>{props.expensesByCat[category]}</td>
-            <td className ={ (newBudgets[category] - props.expensesByCat[category] >0)?"bg-success text-white" : "bg-danger text-white"}>{newBudgets[category] - props.expensesByCat[category]}</td>
-=======
     <div className="col-12 bg-light border border-1 border-success rounded p-4 mb-4 shadow">
       <table className="table border border-1 border-success rounded mb-0">
         {/* Table body */}
@@ -116,7 +81,6 @@ function BudgetTable(props) {
             <th scope="col" className="w-25"><h4>Budget $</h4></th>
             <th scope="col" className="w-25"><h4>Expenses $</h4></th>
             <th scope="col" className="w-25"><h4>Budget Variance $</h4></th>
->>>>>>> e61ae2cf6cd9a6961b4ddaaf613f782ac56464f0
           </tr>
         </thead>
         <tbody>
@@ -150,7 +114,3 @@ function BudgetTable(props) {
 }
 
 export default BudgetTable;
-
-
-
-
