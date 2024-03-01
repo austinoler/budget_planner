@@ -53,13 +53,30 @@ function BudgetTable(props) {
     }));
   };
 
-  const handleBlur = async (category, categoryId) => { // Pass categoryId as argument
+  const handleBlur = async (category) => { // Pass categoryId as argument
     setEditingCategory(null);
+    console.log('catids: ' , props.categoryIDs);
+    var categoryId;
+    switch(category) {
+      case "Food":
+        categoryId = props.categoryIDs.foodID;
+        break;
+      case "Housing":
+        categoryId=props.categoryIDs.housingID;
+        break;
+      case "Transporation":
+        categoryId=props.categoryIDs.transportationID;
+        break;
+      case "Misc":
+        categoryId=props.categoryIDs.miscID;
+        break;
+    }
 
+    console.log(categoryId);
     try {
       await updateCategory({
         variables: {
-          _id: categoryId, // Pass categoryId to updateCategory mutation
+          id: categoryId, // Pass categoryId to updateCategory mutation
           budget: parseFloat(newBudgets[category]) // Convert input value to float
         }
       });
