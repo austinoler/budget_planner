@@ -1,5 +1,8 @@
 # Group Project #3 - Money Master
-Contributors: David Santiago, Nainoa Dinson, Austin Oler and Erin Polhemus 
+
+## Contributors
+
+David Santiago, Nainoa Dinson, Austin Oler and Erin Polhemus 
 
 ## Description
 
@@ -22,9 +25,11 @@ Our group elected to develop an application (which we refer to as "MoneyMaster")
 
 ## Table of Contents
 
+- [Contributors](#contributors)
+
 - [Description](#description)
 
-- [Technologies Used](#technologies_used)
+- [Technologies Used](#technologies)
 
 - [Installation](#installation)
 
@@ -70,18 +75,19 @@ The application is deployed at: https://moneymaster-7c8a75ec1dbb.herokuapp.com/
 
   -- An example of landing page awaiting user sign-up or sign-in:
 
-![ILanding Page](/assets/images/screenshot001.png)
+![ILanding Page] (/client/public/assets/images/screenshot_app_login.png)
 
   -- A view of the user interface, displaying a user budget, associated transactions, and a visualization of exepnses by category:
 
-![User Dashboard](/assets/images/screenshot002.png)
+![User Dashboard] (/client/public/assets/images/screenshot_app_budget.png)
+
+![User Dashboard] (/client/public/assets/images/screenshot_app_txtable.png)
 
 The location of the respository is as follows: https://github.com/austinoler/budget_planner
 
-![Repository Image](/assets/images/screenshot005.png)
-
 ## Credits and Citations
 
+We relied upon a number of the projects that were a part of the curriculum, as well as the Xpert Learning Assistant.
 
 ## License
 
