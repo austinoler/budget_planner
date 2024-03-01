@@ -75,13 +75,13 @@ The application is deployed at: https://moneymaster-7c8a75ec1dbb.herokuapp.com/
 
   -- An example of landing page awaiting user sign-up or sign-in:
 
-![ILanding Page] (/client/public/assets/images/screenshot_app_login.png)
+![ILanding Page](/client/public/assets/images/screenshot_app_login.png)
 
   -- A view of the user interface, displaying a user budget, associated transactions, and a visualization of exepnses by category:
 
-![User Dashboard] (/client/public/assets/images/screenshot_app_budget.png)
+![User Dashboard](/client/public/assets/images/screenshot_app_budget.png)
 
-![User Dashboard] (/client/public/assets/images/screenshot_app_txtable.png)
+![User Dashboard](/client/public/assets/images/screenshot_app_txtable.png)
 
 The location of the respository is as follows: https://github.com/austinoler/budget_planner
 
