@@ -25,8 +25,6 @@ function BudgetTotal(props) {
     }
   }, [data])
 
-  console.log('prop: ' + props.id + ' budget: ', totalBudget);
-
   const handleSubmit = async (event) => {
     // Hide the form when the user submits
 

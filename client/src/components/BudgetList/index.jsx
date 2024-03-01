@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 
 const BudgetList = (props) => {
-
+    // display the users budgets and create a link to display them
     var budgets = Object.values(props)[0];
-    console.log(budgets);
     return (
         <div className= "text-center p-2">
             {budgets ?

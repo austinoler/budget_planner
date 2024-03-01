@@ -10,7 +10,6 @@ class AuthService {
     const token = this.getToken();
     if (token) {
       const decodedToken = decode(token);
-      console.log('Decoded Token:', decodedToken);
       return decodedToken;
     } else {
       return null;

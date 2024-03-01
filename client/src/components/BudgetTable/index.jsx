@@ -22,7 +22,6 @@ function BudgetTable(props) {
   // extract the budget for each category and update the state variable
   useEffect(() => {
     if (data) {
-      console.log('budget; ', data.budget.categories);
       const categories = data.budget.categories;
       var Housing = 0, Food = 0, Transportation = 0, Misc = 0;
       categories.forEach(category => {
@@ -55,7 +54,6 @@ function BudgetTable(props) {
 
   const handleBlur = async (category) => { 
     setEditingCategory(null);
-    console.log('catids: ' , props.categoryIDs);
 
     // pull out the right categoryId from state and update the category budget 
     var categoryId;
@@ -74,7 +72,6 @@ function BudgetTable(props) {
         break;
     }
 
-    console.log(categoryId);
     try {
       await updateCategory({
         variables: {
@@ -83,7 +80,6 @@ function BudgetTable(props) {
         }
       });
     } catch (error) {
-      console.error('Error updating category budget:', error);
     }
   };
 
@@ -123,7 +119,7 @@ function BudgetTable(props) {
                 )}
               </td>
               <td>{props.expensesByCat[category]}</td>
-            <td className ={ (newBudgets[category] - props.expensesByCat[category] >0)?"bg-success text-white" : "bg-danger text-white"}>{newBudgets[category] - props.expensesByCat[category]}</td>
+            <td className ={ (newBudgets[category] - props.expensesByCat[category] >0)?"bg-success text-white p-0" : "bg-danger text-white p-0"}><div className='m-0 pt-2 pb-1 px-2 border border-1 border-white'>{newBudgets[category] - props.expensesByCat[category]}</div></td>
             </tr>
           ))}
         </tbody>

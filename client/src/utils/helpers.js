@@ -17,7 +17,7 @@ export function idbPromise(storeName, method, object) {
     };
 
     request.onerror = function(e) {
-      console.log('There was an error');
+      console.error('There was an error');
     };
 
     request.onsuccess = function(e) {
@@ -26,7 +26,7 @@ export function idbPromise(storeName, method, object) {
       store = tx.objectStore(storeName);
 
       db.onerror = function(e) {
-        console.log('error', e);
+        console.error('error', e);
       };
 
       switch (method) {
@@ -44,7 +44,7 @@ export function idbPromise(storeName, method, object) {
           store.delete(object._id);
           break;
         default:
-          console.log('No valid method');
+          console.error('No valid method');
           break;
       }
 

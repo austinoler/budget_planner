@@ -9,14 +9,13 @@ import Signup from './Signup';
 import Login from './Login';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGET } from '../utils/queries';
-import { ADD_BUDGET, ADD_EXPENSE } from '../utils/mutations';
+import {  ADD_EXPENSE } from '../utils/mutations';
 import { useParams } from 'react-router-dom';
 import { getExpenses } from '../utils/helpers';
 
 const Home = () => {
 
   const { id } = useParams();
-  //   console.log('id: ', id);
   const [addExpense] = useMutation(ADD_EXPENSE);
 
 
@@ -65,7 +64,6 @@ const Home = () => {
       // get expense amount totals for each category and save to state
       const expensesData = getExpenses(categoriesData)
       setExpenses([...expenses, ...expensesData]);
-      console.log('expenses data:', expensesData);
       expensesData.forEach(expense => {
         if(expense.categoryName == 'Housing'){
           housingExpenses += expense.amount;
