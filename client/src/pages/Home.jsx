@@ -8,7 +8,7 @@ import Auth from '../utils/auth'
 import Signup from './Signup';
 import Login from './Login';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_BUDGET } from '../utils/queries';
+import { QUERY_BUDGET, GET_EXPENSES_BY_BUDGET_AND_CATEGORIES } from '../utils/queries';
 import {  ADD_EXPENSE } from '../utils/mutations';
 import { useParams } from 'react-router-dom';
 import { getExpenses } from '../utils/helpers';
@@ -16,7 +16,12 @@ import { getExpenses } from '../utils/helpers';
 const Home = () => {
 
   const { id } = useParams();
-  const [addExpense] = useMutation(ADD_EXPENSE);
+  const [addExpense] = useMutation(ADD_EXPENSE, {
+    refetchQueries: [
+      GET_EXPENSES_BY_BUDGET_AND_CATEGORIES,
+      'getExpenses'
+    ]
+  });
 
 
   const { loading, data } = useQuery(QUERY_BUDGET, {

@@ -3,27 +3,12 @@ import { useQuery, gql } from '@apollo/client';
 import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import {CategoryScale} from 'chart.js'; 
+import { GET_EXPENSES_BY_BUDGET_AND_CATEGORIES } from '../../utils/queries';
 Chart.register(CategoryScale);
 
 
-const GET_EXPENSES_BY_BUDGET_AND_CATEGORIES = gql`
-  query GetExpensesByBudgetAndCategories($budgetId: ID!) {
-    budget(_id: $budgetId) {
-      categories {
-        _id
-        budget
-        expenses {
-          _id
-          categoryName
-          description
-          month
-          day
-          amount
-        }
-      }
-    }
-  }
-`;
+
+
 
 const ExpensesByBudget = ({ id }) => {
   const { loading, error, data } = useQuery(GET_EXPENSES_BY_BUDGET_AND_CATEGORIES, {
