@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_BUDGET, UPDATE_BUDGET } from '../../utils/mutations';
+import { UPDATE_BUDGET } from '../../utils/mutations';
 import { QUERY_BUDGET } from '../../utils/queries';
-
-import Auth from '../../utils/auth'
 function BudgetTotal(props) {
   const [totalBudget, setTotalBudget] = useState(null);
   const [showForm, setShowForm] = useState(true);
@@ -31,10 +29,14 @@ function BudgetTotal(props) {
 
   const handleSubmit = async (event) => {
     // Hide the form when the user submits
-    const date = new Date();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const userId = Auth.getProfile().data._id
+
+    // update the user's total budget to the database
+    await updateBudget({
+      variables: {
+        id: props.id,
+        total: parseFloat(totalBudget)
+      }
+    })
 
     setShowForm(false);
   };
@@ -48,7 +50,7 @@ function BudgetTotal(props) {
     <>
       {/* Conditional rendering to show/hide the form */}
       {showForm ? (
-    
+
         <div className="d-flex align-items-center justify-content-center rounded p-4 mb-4 bg-light">
           <div className="form-Group text-center">
             <h2><label htmlFor="inputBudget">Budget Total:</label></h2>
@@ -73,25 +75,25 @@ function BudgetTotal(props) {
         </div>
       ) : (
 
-      
-        <div className="bg-image opacity-75 shadow col"
-        style={{
-          backgroundImage: "url(/assets/images/budget-total-bg.jpg)",
-          height: "auto",
-          width: "auto",
-          bakgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          WebkitBackgroundSize: 'cover',
-          MozBackgroundSize: 'cover',
-          OBackgroundSize: 'cover',
 
-        }}>
-        <div className= "d-flex align-items-center flex-column justify-content-center rounded p-4 mb-4">
-          {/* Display the message once the budget has been submitted */}
-          <h1 className = "text-center justify-content-center bg-light w-50 rounded">Budget Total:  <div className="text-danger">${totalBudget}</div> <i className=" bi bi-pencil-square" onClick={handleEditClick}> edit</i></h1>
-          {/* Show the edit button */}
-  
-        </div>
+        <div className="bg-image opacity-75 shadow col"
+          style={{
+            backgroundImage: "url(/assets/images/budget-total-bg.jpg)",
+            height: "auto",
+            width: "auto",
+            bakgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            WebkitBackgroundSize: 'cover',
+            MozBackgroundSize: 'cover',
+            OBackgroundSize: 'cover',
+
+          }}>
+          <div className="d-flex align-items-center flex-column justify-content-center rounded p-4 mb-4">
+            {/* Display the message once the budget has been submitted */}
+            <h1 className="text-center justify-content-center bg-light w-50 rounded">Budget Total:  <div className="text-danger">${totalBudget}</div> <i className=" bi bi-pencil-square" onClick={handleEditClick}> edit</i></h1>
+            {/* Show the edit button */}
+
+          </div>
         </div>
       )}
 

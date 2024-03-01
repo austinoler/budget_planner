@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGET } from '../../utils/queries';
-import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
+import { UPDATE_CATEGORY, UPDATE_BUDGET } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
 
 function BudgetTable(props) {
   const [editingCategory, setEditingCategory] = useState(null);
@@ -53,9 +53,11 @@ function BudgetTable(props) {
     }));
   };
 
-  const handleBlur = async (category) => { // Pass categoryId as argument
+  const handleBlur = async (category) => { 
     setEditingCategory(null);
     console.log('catids: ' , props.categoryIDs);
+
+    // pull out the right categoryId from state and update the category budget 
     var categoryId;
     switch(category) {
       case "Food":
