@@ -104,7 +104,7 @@ function BudgetTable(props) {
                 )}
               </td>
               <td>{props.expensesByCat[category]}</td>
-              <td>{newBudgets[category] - props.expensesByCat[category]}</td>
+            <td className ={ (newBudgets[category] - props.expensesByCat[category] >0)?"bg-success text-white" : "bg-danger text-white"}>{newBudgets[category] - props.expensesByCat[category]}</td>
             </tr>
           ))}
         </tbody>
