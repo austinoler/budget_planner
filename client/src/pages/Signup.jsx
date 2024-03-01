@@ -31,13 +31,13 @@ function Signup(props) {
   };
 
   return (
-    <div className="col-5 border border-1 border-success rounded p-4 shadow">
-      <h2 className="border border-1 border-success rounded"><i className="bi bi-person-plus-fill"></i> SIGNUP</h2>
+    <div className="col-4 border border-1 border-success rounded p-4 shadow bg-light">
+      <h2 className="border border-1 border-success rounded text-center"><i className="bi bi-person-plus-fill"></i> SIGNUP</h2>
       <i className="bi bi-person-fill-add"></i>
-      <form onSubmit={handleFormSubmit} className="border border-dark border-1 p-2 rounded">
+      <form onSubmit={handleFormSubmit} className="border border-dark border-1 px-4 rounded">
         <div className="my-3">
-          <label htmlFor="firstName" className="col-2 w-10">
-            <i className="bi bi-person-badge"></i>
+          <label htmlFor="firstName" className="col-2">
+            <h4><i className="bi bi-person-badge"></i></h4>
           </label>
           <input
             placeholder="First Name"
@@ -49,8 +49,8 @@ function Signup(props) {
           />
         </div>
         <div className="my-3">
-          <label htmlFor="lastName" className="col-2 w-10">
-            <i className="bi bi-person-badge-fill"></i>
+          <label htmlFor="lastName" className="col-2">
+            <h4><i className="bi bi-person-badge-fill"></i></h4>
           </label>
           <input
             placeholder="Last Name"
@@ -62,8 +62,8 @@ function Signup(props) {
           />
         </div>
         <div className="my-3">
-          <label htmlFor="email" className="col-2 w-10">
-            <i className="bi bi-envelope-fill"></i>
+          <label htmlFor="email" className="col-2">
+            <h4><i className="bi bi-envelope-fill"></i></h4>
           </label>
           <input
             placeholder="email@example.com"
@@ -75,8 +75,8 @@ function Signup(props) {
           />
         </div>
         <div className="my-3">
-          <label htmlFor="pwd" className="col-2 w-10">
-            <i className="bi bi-lock-fill"></i>
+          <label htmlFor="pwd" className="col-2">
+            <h4><i className="bi bi-lock-fill"></i></h4>
           </label>
           <input
             placeholder="Create a Password"
@@ -87,7 +87,7 @@ function Signup(props) {
             className="col-10"
           />
         </div>
-        <div className="flex flex-end mb-3">
+        <div className="text-center mb-3 mt-4">
           <button type="submit"><i className="bi bi-box-arrow-in-right text-white"></i> Submit</button>
         </div>
       </form>
