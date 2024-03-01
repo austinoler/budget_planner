@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_BUDGET } from '../../utils/queries';
-import { UPDATE_CATEGORY } from '../../utils/mutations'; // Import UPDATE_CATEGORY mutation
+import { UPDATE_CATEGORY } from '../../utils/mutations';
 import AuthService from '../../utils/auth';
 import { useParams } from 'react-router-dom';
 
-
-function BudgetTable(props) {
+const BudgetTable = (props) => {
   const [editingCategory, setEditingCategory] = useState(null);
   const [newBudgets, setNewBudgets] = useState({
     Housing: '',
@@ -15,69 +14,78 @@ function BudgetTable(props) {
     Misc: ''
   });
 
-  // run get budget query for the budget id that was clicked and get the related category data
   const { loading, error, data } = useQuery(QUERY_BUDGET, {
     variables: {
-      id : props.id
+      id: props.id
     }
   });
 
-  // extract the budget for each category and update the state variable
-  useEffect(()=>{
-    if(data){
-      console.log('budget; ' , data.budget.categories);
+  useEffect(() => {
+    if (data) {
+      console.log('Data:', data); // Log the fetched data
       const categories = data.budget.categories;
-      var Housing = 0, Food = 0, Transportation = 0, Misc = 0;
-      categories.forEach(category=> {
-        if(category.name == 'Housing'){
+      var Housing = 0,
+        Food = 0,
+        Transportation = 0,
+        Misc = 0;
+      categories.forEach((category) => {
+        if (category.name === 'Housing') {
           Housing += category.budget;
-        }else if(category.name == 'Food'){
+        } else if (category.name === 'Food') {
           Food += category.budget;
-        }else if(category.name == 'Transportation'){
+        } else if (category.name === 'Transportation') {
           Transportation += category.budget;
-        }else if (category.name == 'Misc'){
+        } else if (category.name === 'Misc') {
           Misc += category.budget;
         }
-        setNewBudgets({Housing,Food,Transportation,Misc})
+        setNewBudgets({ Housing, Food, Transportation, Misc });
       });
     }
-  },[data]);
+  }, [data]);
 
-  const [updateCategory] = useMutation(UPDATE_CATEGORY); // Use UPDATE_CATEGORY mutation
+  const [updateCategory] = useMutation(UPDATE_CATEGORY);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const initialBudgets = {};
-  //     data.category.forEach((budget) => {
-  //       initialBudgets[budget.name] = budget.budget || ''; // Set to empty string if budget is not available
-  //     });
-  //     setNewBudgets(initialBudgets);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    console.log('Editing category in useEffect:', editingCategory);
+  }, [editingCategory]);
 
   const handleBudgetClick = (category) => {
-    setEditingCategory(category);
+    console.log('Clicked category:', category);
+    if (category) {
+      setEditingCategory(prevCategory => {
+        if (prevCategory === category) return prevCategory;
+        return category;
+      });
+    } else {
+      console.error('Error: category is null or undefined');
+    }
   };
 
   const handleInputChange = (e, category) => {
-    setNewBudgets(prevState => ({
+    setNewBudgets((prevState) => ({
       ...prevState,
       [category]: e.target.value
     }));
   };
 
-  const handleBlur = async (category, categoryId) => { // Pass categoryId as argument
-    setEditingCategory(null);
-
+  const handleBlur = async (category) => {
+    console.log('Editing category in handleBlur:', editingCategory);
     try {
-      await updateCategory({
-        variables: {
-          _id: categoryId, // Pass categoryId to updateCategory mutation
-          budget: parseFloat(newBudgets[category]) // Convert input value to float
-        }
-      });
+      if (editingCategory && editingCategory._id) {
+        const response = await updateCategory({
+          variables: {
+            id: editingCategory._id,
+            budget: parseFloat(newBudgets[category])
+          }
+        });
+        console.log('Mutation response:', response);
+      } else {
+        console.error('Error: editingCategory or editingCategory._id is null or undefined');
+      }
     } catch (error) {
       console.error('Error updating category budget:', error);
+    } finally {
+      setEditingCategory(null); // Reset editingCategory regardless of success or failure
     }
   };
 
@@ -86,47 +94,55 @@ function BudgetTable(props) {
 
   return (
     <div className="border border-1 border-success rounded p-4 mb-4 shadow">
-    <table className="table">
-      {/* Table body */}
-      <thead>
-        <tr className="col">
-          <th scope="col" className="w-25">Category</th>
-          <th scope="col" className="w-25">Budget $</th>
-          <th scope="col" className="w-25">Expenses $</th>
-          <th scope="col" className="w-25">Budget Variance $</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(newBudgets).map((category) => (
-          <tr key={category}>
-            <th scope="row">{category}</th>
-            <td
-              onClick={() => handleBudgetClick(category)}
-              className={editingCategory === category ? '' : 'hover-effect'}
-            >
-              {editingCategory === category ? (
-                <input
-                  type="number"
-                  value={newBudgets[category]}
-                  onChange={(e) => handleInputChange(e, category)}
-                  onBlur={() => handleBlur(category)}
-                  autoFocus
-                />
-              ) : (
-                newBudgets[category]
-              )}
-            </td>
-            <td>{props.expensesByCat[category]}</td>
-            <td>{newBudgets[category]-props.expensesByCat[category]}</td>
+      <table className="table">
+        <thead>
+          <tr className="col">
+            <th scope="col" className="w-25">
+              Category
+            </th>
+            <th scope="col" className="w-25">
+              Budget $
+            </th>
+            <th scope="col" className="w-25">
+              Expenses $
+            </th>
+            <th scope="col" className="w-25">
+              Budget Variance $
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {Object.keys(newBudgets).map((category) => (
+            <tr key={category}>
+              <th scope="row">{category}</th>
+              <td
+                onClick={() => handleBudgetClick(category)}
+                className={editingCategory === category ? '' : 'hover-effect'}
+              >
+                {editingCategory === category ? (
+                  <input
+                    type="number"
+                    value={newBudgets[category]}
+                    onChange={(e) => handleInputChange(e, category)}
+                    onBlur={() => handleBlur(category)}
+                    autoFocus
+                  />
+                ) : (
+                  newBudgets[category]
+                )}
+              </td>
+              <td>{props.expensesByCat[category]}</td>
+              <td>{newBudgets[category] - props.expensesByCat[category]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
 export default BudgetTable;
+
 
 
 
