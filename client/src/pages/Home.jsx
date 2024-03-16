@@ -8,16 +8,20 @@ import Auth from '../utils/auth'
 import Signup from './Signup';
 import Login from './Login';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_BUDGET } from '../utils/queries';
-import { ADD_BUDGET, ADD_EXPENSE } from '../utils/mutations';
+import { QUERY_BUDGET, GET_EXPENSES_BY_BUDGET_AND_CATEGORIES } from '../utils/queries';
+import {  ADD_EXPENSE } from '../utils/mutations';
 import { useParams } from 'react-router-dom';
 import { getExpenses } from '../utils/helpers';
 
 const Home = () => {
 
   const { id } = useParams();
-  //   console.log('id: ', id);
-  const [addExpense] = useMutation(ADD_EXPENSE);
+  const [addExpense] = useMutation(ADD_EXPENSE, {
+    refetchQueries: [
+      GET_EXPENSES_BY_BUDGET_AND_CATEGORIES,
+      'getExpenses'
+    ]
+  });
 
 
   const { loading, data } = useQuery(QUERY_BUDGET, {
@@ -65,7 +69,6 @@ const Home = () => {
       // get expense amount totals for each category and save to state
       const expensesData = getExpenses(categoriesData)
       setExpenses([...expenses, ...expensesData]);
-      console.log('expenses data:', expensesData);
       expensesData.forEach(expense => {
         if(expense.categoryName == 'Housing'){
           housingExpenses += expense.amount;
@@ -161,7 +164,7 @@ const Home = () => {
 
       <div className="row p-4">
         <BudgetTotal id={id} />
-        <BudgetTable id={id} expenses={expenses} expensesByCat={expensesByCat} />
+        <BudgetTable id={id} expenses={expenses} expensesByCat={expensesByCat} categoryIDs={categoryIDs}/>
         <ExpensesForm onSubmit={handleExpenseSubmit} />
         <TransactionsTable expenses={expenses} />
         <ExpensesByBudget id={id} />

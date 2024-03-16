@@ -21,6 +21,7 @@ query Query($id: ID!) {
   }
 }
 `;
+
 export const QUERY_USERS = gql`
 query User {
   users {
@@ -154,3 +155,22 @@ query Query {
     recurring
   }
 }`;
+
+export const GET_EXPENSES_BY_BUDGET_AND_CATEGORIES = gql`
+  query GetExpensesByBudgetAndCategories($budgetId: ID!) {
+    budget(_id: $budgetId) {
+      categories {
+        _id
+        budget
+        expenses {
+          _id
+          categoryName
+          description
+          month
+          day
+          amount
+        }
+      }
+    }
+  }
+`;

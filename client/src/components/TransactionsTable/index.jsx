@@ -9,11 +9,11 @@ function TransactionsTable({ expenses }) {
     acc[expense.categoryName].push(expense);
     return acc;
   }, {});
-  console.log('expenses :' , expenses);
-  return ( 
+
+  return (
     <div className="col-6 border border-1 border-success rounded p-4 mb-4 shadow bg-light">
       <h2 className="border border-1 border-success rounded p-2"><i className="bi bi-calculator"></i> Transactions</h2>
-      <div id="accordion" className= "border border-1 border-dark rounded">
+      <div id="accordion" className="border border-1 border-dark rounded">
         {Object.entries(groupedExpenses).map(([category, categoryExpenses], index) => (
           <div key={index} className="card w-100 mt-2">
             <div className="card-header" id={`heading${index}`}>
@@ -27,7 +27,7 @@ function TransactionsTable({ expenses }) {
               <div className="card-body text-start">
                 {categoryExpenses.map((expense, index) => (
                   <div key={index}>
-                      <h4><i className="bi bi-receipt"></i> {expense.description ? `${expense.description}: ` : ''} ${expense.amount}</h4><br />
+                    <h4><i className="bi bi-receipt"></i> {expense.description ? `${expense.description}: ` : ''} ${expense.amount}</h4><br />
                   </div>
                 ))}
               </div>

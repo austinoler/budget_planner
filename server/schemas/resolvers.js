@@ -76,7 +76,7 @@ const resolvers = {
       return category;
     },
     updateCategory: async (parent, { _id, budget }) => {
-      await Category.findOneAndUpdate({ _id: _id }, { budget });
+      const updatedCategory = await Category.findOneAndUpdate({ _id: _id }, { budget });
 
       return updatedCategory;
     },
